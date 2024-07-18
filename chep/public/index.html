@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UID 결제 시스템</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .status.success {
+            border-color: #4CAF50;
+            background-color: #e8f5e9;
+        }
+        .status.error {
+            border-color: #F44336;
+            background-color: #ffebee;
+        }
+        .info {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .info.admin {
+            border-color: #2196F3;
+            background-color: #e3f2fd;
+        }
+        .info.user {
+            border-color: #FF9800;
+            background-color: #fff3e0;
+        }
+        .user-info, .admin-info {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UID 결제 시스템</h1>
+        <div id="status" class="status"></div>
+
+        <div id="info" class="info"></div>
+
+        <div class="user-info" id="user-info">
+            <h2>유저 카드 정보</h2>
+            <p>충전금액: <span id="user-balance"></span></p>
+        </div>
+
+        <div class="admin-info" id="admin-info">
+            <h2>관리자 정보</h2>
+            <p id="admin-details"></p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Detected Tags</th>
+                </tr>
+            </thead>
+            <tbody id="detected-objects">
+                <!-- 감지된 태그 목록이 여기에 표시됩니다. -->
+            </tbody>
+        </table>
+
+        <button onclick="clearDetectedObjects()">리스트 삭제</button>
+    </div>
+
+    <script>
+        async function loadDetectedObjects() {
+            try {
+                const response = await fetch('/detected-objects');
+                if (response.ok) {
+                    const objects = await response.json();
+                    displayDetectedObjects(objects);
+                } else {
+                    const errorMessage = await response.text();
+                    displayStatus(`Failed to load detected objects: ${errorMessage}`, 'error');
+                }
+            } catch (error) {
+                displayStatus(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function clearDetectedObjects() {
+            try {
+                const response = await fetch('/clear-detected-objects', {
+                    method: 'POST',
+                });
+                if (response.ok) {
+                    loadDetectedObjects();  // 감지된 객체 목록을 다시 로드하여 화면을 업데이트
+                } else {
+                    const errorMessage = await response.text();
+                    displayStatus(`Failed to clear detected objects: ${errorMessage}`, 'error');
+                }
+            } catch (error) {
+                displayStatus(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        function displayDetectedObjects(objects) {
+            const objectList = document.getElementById('detected-objects');
+            const userInfo = document.getElementById('user-info');
+            const adminInfo = document.getElementById('admin-info');
+            const info = document.getElementById('info');
+            const userBalance = document.getElementById('user-balance');
+            const adminDetails = document.getElementById('admin-details');
+            
+            objectList.innerHTML = '';  // 기존 목록을 비움
+            let latestMessage = '';
+
+            objects.forEach(obj => {
+                const row = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.textContent = obj.message;  // 객체 메시지 설정
+                row.appendChild(cell);
+                objectList.appendChild(row);
+                latestMessage = obj.message;
+            });
+
+            if (latestMessage.includes('User card detected')) {
+                userInfo.style.display = 'block';
+                adminInfo.style.display = 'none';
+                info.className = 'info user';
+                info.innerHTML = '<strong>매장 고객입니다.</strong>';
+                const balanceMatch = latestMessage.match(/(\d+)원 결제용 카드/);
+                if (balanceMatch) {
+                    userBalance.textContent = `${balanceMatch[1]}원`;
+                }
+            } else if (latestMessage.includes('Admin card detected')) {
+                adminInfo.style.display = 'block';
+                userInfo.style.display = 'none';
+                info.className = 'info admin';
+                info.innerHTML = '<strong>관리자입니다.</strong>';
+                const adminInfoMatch = latestMessage.match(/관리자명: (.*?)\n연락처: (.*?)\n서비스구분: (.*?)\n지점명: (.*?)\n주소: (.*?)/);
+                if (adminInfoMatch) {
+                    adminDetails.innerHTML = `관리자명: ${adminInfoMatch[1]}<br>연락처: ${adminInfoMatch[2]}<br>서비스구분: ${adminInfoMatch[3]}<br>지점명: ${adminInfoMatch[4]}<br>주소: ${adminInfoMatch[5]}`;
+                }
+            } else if (latestMessage.includes('purchased for')) {
+                info.className = 'info success';
+                info.innerHTML = `<strong>${latestMessage}</strong>`;
+            } else if (latestMessage.includes('Insufficient balance')) {
+                info.className = 'info error';
+                info.innerHTML = '<strong>잔액이 부족합니다.</strong>';
+            } else {
+                userInfo.style.display = 'none';
+                adminInfo.style.display = 'none';
+                info.className = 'info';
+                info.textContent = '';
+            }
+        }
+
+        function displayStatus(message, type) {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = message;
+            statusElement.className = `status ${type}`;
+        }
+
+        // 주기적으로 감지된 객체 목록을 업데이트 (3초마다)
+        setInterval(loadDetectedObjects, 3000);
+
+        // 페이지가 로드될 때 감지된 객체 목록을 로드
+        window.onload = loadDetectedObjects;
+    </script>
+</body>
+</html>

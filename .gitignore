@@ -1,0 +1,55 @@
+#.env
+.env
+
+#c
+c/*
+c/*.o
+c/**/*
+!c/**/
+!c/**/*.c
+!c/**/lib/
+!c/**/lib/*.h
+!c/**/Makefile
+
+##java
+**/*.class
+
+##scala
+scala/**/project
+scala/**/target
+
+#maven
+maven/**/target
+
+## nodejs
+node/**/node_modules
+node/**/package-lock.json
+node/conf/*
+
+## python venv
+python/**/.venv
+python/**/__pycache__/
+python/secret.json
+
+## mongodb
+mongodb/backup
+
+## oracle
+oracle/node/dbConfig.js
+oracle/node/node_modules
+oracle/node/package-lock.json
+
+## aws
+.c9
+
+## 비밀~~~ 
+.venv/
+secret.json
+.env
+**/uploadedFiles
+
+node_modules
+package-lock.json
+
+#sauron
+myenv/
