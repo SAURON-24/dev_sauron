@@ -32,6 +32,7 @@ product_prices = {
     "우유": {"price": 500, "quantity": 0}
 }
 
+
 # Sample UID mappings (these should be unique UIDs of your NFC tags)
 uids = {
     "user_card": "D99EFA29",       # Example UID for user card

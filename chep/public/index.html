@@ -22,16 +22,16 @@
                 <h4>금액</h4>
             </div>
             <div class="inBox">
-                <!-- 여기부분 -->
-                <div id="detected-tags"></div>
+            <!-- 여기부분 -->
+            <div id="detected-tags"></div>
 
-                <h2 class="question"><span class="black-text">위 목록이 장바구니에 담긴 물건이<br></span><span class="red-text">맞습니까?</span></h2>
+            <h2 class="question"><span class="black-text">위 목록이 장바구니에 담긴 물건이<br></span><span class="red-text">맞습니까?</span></h2>
 
-                <div class="totalBox">
-                    <span>합계</span>
-                    <span id="total-items">0개</span>
-                    <span id="total-price">0원</span>
-                </div>
+            <div class="totalBox">
+                <span>합계</span>
+                <span id="total-items">0개</span>
+                <span id="total-price">0원</span>
+            </div>
             </div>
 
             <div class="moneyBtnBox">
@@ -115,8 +115,14 @@
                 const tagDiv = document.createElement('div');
                 tagDiv.classList.add('detected-tag');
                 const message = obj.message;
+                const emoji = "🍎"; // 예시 이모티콘, 원하는 이모티콘으로 변경 가능
+                let quantityEmojis = "";
+
                 if (typeof message === 'object' && message.name && message.quantity && message.price) {
-                    tagDiv.innerHTML = `<div class="product-name">${message.name}</div><div>${message.quantity}</div><div>${message.price}원</div>`;
+                    for (let i = 0; i < message.quantity; i++) {
+                        quantityEmojis += emoji;
+                    }
+                    tagDiv.innerHTML = `<div class="product-name">${message.name}</div><div>${quantityEmojis}</div><div>${message.price}원</div>`;
                     totalItems += message.quantity;
                     totalPrice += message.quantity * message.price;
                 } else {

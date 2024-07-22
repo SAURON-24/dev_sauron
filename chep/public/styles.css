@@ -20,7 +20,6 @@ body {
     padding: 8px 0; /* 상하 여백 추가 */
     border-bottom: 0.5px solid #DAC7B1; /* 항목 사이에 구분선 추가 */
 }
-
 .detected-tag div {
     display: flex;
     align-items: center;
@@ -29,11 +28,6 @@ body {
     text-align: center; /* 중앙 정렬 */
     height: 70px;
 }
-
-.product-name {
-    font-weight: bold; /* 상품명을 볼드체로 설정 */
-}
-
 .headerBox {
     display: flex;
     justify-content: space-between;
@@ -54,12 +48,12 @@ body {
 
 .container {
     min-width: 800px;
+    
     margin: 0 auto;
     padding: 30px;
     background-color: #F6F2EF;
     max-height: 1920px;
 }
-
 .wrapper {
     width: 1080px;
     height: 1920px;
@@ -89,6 +83,10 @@ body {
     z-index: 1;
 }
 
+.product-name {
+    font-weight: bold; /* 상품명을 볼드체로 설정 */
+}
+
 .question {
     display: flex;
     justify-content: space-between;
@@ -96,7 +94,7 @@ body {
     align-items: center;
     height: 120px;
     text-align: center;
-    color: #f44336;
+    color: #f44336;;
     margin: 110px 0;
     font-size: 45px;
 }
@@ -120,6 +118,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+
 }
 
 button {
