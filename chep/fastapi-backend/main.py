@@ -22,14 +22,14 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 # Initial balance for user card
-user_balance = 10000000
+user_balance = 100000
 
 # Product prices (for simplicity, we use fixed prices)
 product_prices = {
-    "국간장": {"price": 2000, "quantity": 0},
-    "진간장": {"price": 1000, "quantity": 0},
-    "설탕": {"price": 3000, "quantity": 0},
-    "우유": {"price": 800, "quantity": 0}
+    "국간장": {"price": 200, "quantity": 0},
+    "진간장": {"price": 300, "quantity": 0},
+    "설탕": {"price": 400, "quantity": 0},
+    "우유": {"price": 500, "quantity": 0}
 }
 
 # Sample UID mappings (these should be unique UIDs of your NFC tags)

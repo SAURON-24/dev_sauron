@@ -8,46 +8,45 @@
     <title>UID 결제 시스템</title>
 </head>
 <body>
-    <header class="headerBox">
-        <button class="hamburger">☰</button>
-        <p>주문 내역 확인</p>
-        <button class="addButton">+</button>
-    </header>
+    <div class="wrapper">
+        <header class="headerBox">
+            <button class="hamburger" onclick="clearDetectedObjects()">☰</button>
+            <p>주문 내역 확인</p>
+            <button class="addButton">+</button>
+        </header>
 
-    <section class="container">
-        <div class="listInfo">
-            <h4>상품명</h4>
-            <h4>수량</h4>
-            <h4>금액</h4>
-        </div>
+        <section class="container">
+            <div class="listInfo">
+                <h4>상품명</h4>
+                <h4>수량</h4>
+                <h4>금액</h4>
+            </div>
+            <div class="inBox">
+                <!-- 여기부분 -->
+                <div id="detected-tags"></div>
 
-        <!-- 여기부분 -->
-        <div id="detected-tags"></div>
+                <h2 class="question"><span class="black-text">위 목록이 장바구니에 담긴 물건이<br></span><span class="red-text">맞습니까?</span></h2>
 
-        <h2 class="question"><span class="black-text">위 목록이 장바구니에 담긴 물건이<br></span><span class="red-text">맞습니까?</span></h2>
-        <div class="moneyBtnBox">
-            <button class="moneyBtn_cencle"><div class="iconBox" style="margin-top: 10px"><img src="img/back.png" alt="결제취소" class="icon"  style="margin-bottom: 8px">결제 취소</div></button>
-            <button class="moneyBtn_fix" onclick="startPayment()"><div class="iconBox"><img src="img/check_4.png" alt="결제진행" class="icon">결제 진행</div></button>
-        </div>
-        <!-- <div id="status" class="status"></div> -->
+                <div class="totalBox">
+                    <span>합계</span>
+                    <span id="total-items">0개</span>
+                    <span id="total-price">0원</span>
+                </div>
+            </div>
 
-        <!-- <div id="info" class="info"></div> -->
-
-        <div class="user-info" id="user-info">
-            <h2>유저 카드 정보</h2>
-            <p>충전금액: <span id="user-balance"></span></p>
-        </div>
-
-        <div class="admin-info" id="admin-info">
-            <h2>관리자 정보</h2>
-            <p id="admin-details"></p>
-        </div>
-
-        <button onclick="clearDetectedObjects()">리스트 삭제</button>
-    </section>
-
-    <div id="payment-popup" class="popup">
-        <h2>카드를 투입구에 터치해주세요</h2>
+            <div class="moneyBtnBox">
+                <button class="moneyBtn_cencle">
+                    <div class="iconBox" style="margin-top: 10px">
+                        <img src="img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">결제 취소
+                    </div>
+                </button>
+                <button class="moneyBtn_fix" onclick="startPayment()">
+                    <div class="iconBox">
+                        <img src="img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">결제 진행
+                    </div>
+                </button>
+            </div>
+        </section>
     </div>
 
     <script>
@@ -65,7 +64,7 @@
                 displayStatus(`Error: ${error.message}`, 'error');
             }
         }
-    
+
         async function clearDetectedObjects() {
             try {
                 const response = await fetch('/clear-detected-objects', {
@@ -81,7 +80,7 @@
                 displayStatus(`Error: ${error.message}`, 'error');
             }
         }
-    
+
         async function startPayment() {
             const response = await fetch('/start-payment', { method: 'POST' });
             if (response.ok) {
@@ -91,7 +90,7 @@
                 displayStatus(`Failed to start payment: ${errorMessage}`, 'error');
             }
         }
-    
+
         async function confirmPayment() {
             const response = await fetch('/confirm-payment', { method: 'POST' });
             if (response.ok) {
@@ -103,31 +102,34 @@
                 displayStatus(`Failed to confirm payment: ${errorMessage}`, 'error');
             }
         }
-    
+
         function displayDetectedObjects(objects) {
             const detectedTagsDiv = document.getElementById('detected-tags');
-            const userInfo = document.getElementById('user-info');
-            const adminInfo = document.getElementById('admin-info');
-            const info = document.getElementById('info');
-            const userBalance = document.getElementById('user-balance');
-            const adminDetails = document.getElementById('admin-details');
-        
             detectedTagsDiv.innerHTML = '';  // 기존 목록을 비움
             let latestMessage = '';
-    
+
+            let totalItems = 0;
+            let totalPrice = 0;
+
             objects.forEach(obj => {
                 const tagDiv = document.createElement('div');
+                tagDiv.classList.add('detected-tag');
                 const message = obj.message;
                 if (typeof message === 'object' && message.name && message.quantity && message.price) {
-                    tagDiv.innerHTML = `<p>${message.name}</p><p>${message.quantity}</p><p>${message.price}원</p>`;
+                    tagDiv.innerHTML = `<div class="product-name">${message.name}</div><div>${message.quantity}</div><div>${message.price}원</div>`;
+                    totalItems += message.quantity;
+                    totalPrice += message.quantity * message.price;
                 } else {
-                    tagDiv.innerHTML = `<p>${message}</p>`;
+                    tagDiv.innerHTML = `<div class="product-name">${message}</div><div></div><div></div>`;
                 }
                 detectedTagsDiv.appendChild(tagDiv);
-    
+
                 latestMessage = message.name || message;
             });
-    
+
+            document.getElementById('total-items').textContent = `${totalItems}개`;
+            document.getElementById('total-price').textContent = `${totalPrice.toLocaleString()}원`;
+
             if (latestMessage.includes('User card detected')) {
                 userInfo.style.display = 'block';
                 adminInfo.style.display = 'none';
@@ -156,37 +158,37 @@
                 info.textContent = '';
             }
         }
-    
+
         function displayStatus(message, type) {
             const statusElement = document.getElementById('status');
             statusElement.textContent = message;
             statusElement.className = `status ${type}`;
         }
-    
+
         function displayPopup() {
             const popup = document.getElementById('payment-popup');
             popup.style.display = 'block';
         }
-    
+
         function closePopup() {
             const popup = document.getElementById('payment-popup');
             popup.style.display = 'none';
         }
-    
+
         const ws = new WebSocket('ws://' + window.location.host + '/ws');
-    
+
         ws.onopen = function(event) {
             console.log('WebSocket connection opened');
         };
-    
+
         ws.onmessage = function(event) {
             const message = JSON.parse(event.data);
             console.log('Received WebSocket message:', message);
-    
+
             const tagId = message.tagId;
             const now = new Date().getTime();
             const lastTaggedTime = lastTaggedTimes[tagId] || 0;
-    
+
             if (now - lastTaggedTime > 3000) { // 3초 간격을 두고 태깅
                 lastTaggedTimes[tagId] = now;
                 loadDetectedObjects();
@@ -195,16 +197,15 @@
                 }
             }
         };
-    
+
         ws.onclose = function(event) {
             console.log('WebSocket connection closed, retrying in 3 seconds');
             setTimeout(function() {
                 ws = new WebSocket('ws://' + window.location.host + '/ws');
             }, 3000);
         };
-    
+
         window.onload = loadDetectedObjects;
     </script>
-    
 </body>
 </html>
