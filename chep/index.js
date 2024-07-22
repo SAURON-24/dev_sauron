@@ -11,6 +11,7 @@ const apiUrl = 'http://3.38.221.183:8000';  // FastAPI 서버 URL
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+// 정적 파일 제공 설정
 app.use(express.static('public'));
 
 app.get('/detected-objects', async (req, res) => {

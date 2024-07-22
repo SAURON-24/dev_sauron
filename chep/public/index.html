@@ -37,12 +37,12 @@
             <div class="moneyBtnBox">
                 <button class="moneyBtn_cencle">
                     <div class="iconBox" style="margin-top: 10px">
-                        <img src="img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">결제 취소
+                        <img src="/img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">결제 취소
                     </div>
                 </button>
                 <button class="moneyBtn_fix" onclick="startPayment()">
                     <div class="iconBox">
-                        <img src="img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">결제 진행
+                        <img src="/img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">결제 진행
                     </div>
                 </button>
             </div>
@@ -115,14 +115,14 @@
                 const tagDiv = document.createElement('div');
                 tagDiv.classList.add('detected-tag');
                 const message = obj.message;
-                const emoji = "🍎"; // 예시 이모티콘, 원하는 이모티콘으로 변경 가능
-                let quantityEmojis = "";
+                const imagePath = `/img/${message.image}`; // 이미지 경로 수정
+                let quantityImages = "";
 
-                if (typeof message === 'object' && message.name && message.quantity && message.price) {
+                if (typeof message === 'object' && message.name && message.quantity && message.price && message.image) {
                     for (let i = 0; i < message.quantity; i++) {
-                        quantityEmojis += emoji;
+                        quantityImages += `<img src="${imagePath}" alt="${message.name}" style="width: 30px; height: 30px;">`;
                     }
-                    tagDiv.innerHTML = `<div class="product-name">${message.name}</div><div>${quantityEmojis}</div><div>${message.price}원</div>`;
+                    tagDiv.innerHTML = `<div class="product-name">${message.name}</div><div>${quantityImages}</div><div>${message.price}원</div>`;
                     totalItems += message.quantity;
                     totalPrice += message.quantity * message.price;
                 } else {
@@ -135,34 +135,6 @@
 
             document.getElementById('total-items').textContent = `${totalItems}개`;
             document.getElementById('total-price').textContent = `${totalPrice.toLocaleString()}원`;
-
-            if (latestMessage.includes('User card detected')) {
-                userInfo.style.display = 'block';
-                adminInfo.style.display = 'none';
-                info.className = 'info user';
-                info.innerHTML = '<strong>매장 고객입니다.</strong>';
-                const balanceMatch = latestMessage.match(/(\d+)원 결제용 카드/);
-                if (balanceMatch) {
-                    userBalance.textContent = `${balanceMatch[1]}원`;
-                }
-            } else if (latestMessage.includes('Admin card detected')) {
-                adminInfo.style.display = 'block';
-                userInfo.style.display = 'none';
-                info.className = 'info admin';
-                info.innerHTML = '<strong>관리자입니다.</strong>';
-                adminDetails.innerHTML = `관리자명: ${objects[objects.length - 1].info.관리자명}<br>연락처: ${objects[objects.length - 1].info.연락처}<br>서비스구분: ${objects[objects.length - 1].info.서비스구분}<br>지점명: ${objects[objects.length - 1].info.지점명}<br>주소: ${objects[objects.length - 1].info.주소}`;
-            } else if (latestMessage.includes('purchased for')) {
-                info.className = 'info success';
-                info.innerHTML = `<strong>${latestMessage}</strong>`;
-            } else if (latestMessage.includes('Insufficient balance')) {
-                info.className = 'info error';
-                info.innerHTML = '<strong>잔액이 부족합니다.</strong>';
-            } else {
-                userInfo.style.display = 'none';
-                adminInfo.style.display = 'none';
-                info.className = 'info';
-                info.textContent = '';
-            }
         }
 
         function displayStatus(message, type) {

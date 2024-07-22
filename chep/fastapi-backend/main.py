@@ -1,4 +1,5 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Dict, Any
 
@@ -24,14 +25,13 @@ manager = ConnectionManager()
 # Initial balance for user card
 user_balance = 100000
 
-# Product prices (for simplicity, we use fixed prices)
+# Product prices and images
 product_prices = {
-    "국간장": {"price": 200, "quantity": 0},
-    "진간장": {"price": 300, "quantity": 0},
-    "설탕": {"price": 400, "quantity": 0},
-    "우유": {"price": 500, "quantity": 0}
+    "국간장": {"price": 200, "quantity": 0, "image": "guk.png"},
+    "진간장": {"price": 300, "quantity": 0, "image": "jin.png"},
+    "설탕": {"price": 400, "quantity": 0, "image": "sugar.png"},
+    "우유": {"price": 500, "quantity": 0, "image": "milk.png"}
 }
-
 
 # Sample UID mappings (these should be unique UIDs of your NFC tags)
 uids = {
@@ -84,7 +84,8 @@ async def read_nfc(tag: NFCTag):
                     message = {
                         "name": product,
                         "quantity": data["quantity"],
-                        "price": data["price"]
+                        "price": data["price"],
+                        "image": data["image"]
                     }
                     info = {"balance": user_balance}
                     break
@@ -132,3 +133,5 @@ async def websocket_endpoint(websocket: WebSocket):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+app.mount("/img", StaticFiles(directory="../public/img"), name="img")
