@@ -1,7 +1,4 @@
-# dev_sauron
-
-
-# 전 SAURON 현 시소 기획서
+# 전 SAURON 현 시소
 
 ### 프로젝트 이름에 대한 의미: 시소 (See-Saw)
 
