@@ -221,7 +221,7 @@ button {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #ECE5DD;
+    background-color: #fff;
     border-radius: 50px;
     max-height: 50px;
     font-size: 40px;
