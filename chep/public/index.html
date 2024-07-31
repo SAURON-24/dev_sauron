@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <script src="https://kit.fontawesome.com/cbcad42a26.js" crossorigin="anonymous"></script>
     <title>UID 결제 시스템</title>
 </head>
@@ -22,31 +22,39 @@
                 <h4>금액</h4>
             </div>
             <div class="inBox">
-            <!-- 여기부분 -->
-            <div id="detected-tags"></div>
-
-            <h2 class="question"><span class="black-text">위 목록이 장바구니에 담긴 물건이<br></span><span class="red-text">맞습니까?</span></h2>
-
-            <div class="totalBox">
-                <span>합계</span>
-                <span id="total-items">0개</span>
-                <span id="total-price">0원</span>
-            </div>
+                <div id="detected-tags"></div>
+                <h2 class="question"><span class="black-text">위 목록이 장바구니에 담긴 물건이<br></span><span class="red-text">맞습니까?</span></h2>
+                <div class="totalBox">
+                    <span>합계</span>
+                    <span id="total-items">0개</span>
+                    <span id="total-price">0원</span>
+                </div>
             </div>
 
             <div class="moneyBtnBox">
                 <button class="moneyBtn_cencle">
                     <div class="iconBox" style="margin-top: 10px">
-                        <img src="/img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">결제 취소
+                        <img src="./img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">결제 취소
                     </div>
                 </button>
                 <button class="moneyBtn_fix" onclick="startPayment()">
                     <div class="iconBox">
-                        <img src="/img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">결제 진행
+                        <img src="./img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">결제 진행
                     </div>
                 </button>
             </div>
         </section>
+        
+        <div id="payment-popup" class="popup">
+            <div class="popup-content">
+                <div class="popup-title" id="popup-title">신용카드를 리더기에 대주세요.</div>
+                <img src="./img/태깅4.gif" alt="Credit Card" class="popup-image" id="popup-image">
+                <button class="popup-cancel" onclick="closePopup()">취소</button>
+                <button class="popup-next" onclick="simulateTagging()">다음</button>
+            </div>
+        </div>
+
+        <div id="overlay" class="overlay"></div>
     </div>
 
     <script>
@@ -115,7 +123,7 @@
                 const tagDiv = document.createElement('div');
                 tagDiv.classList.add('detected-tag');
                 const message = obj.message;
-                const imagePath = `/img/${message.image}`; // 이미지 경로 수정
+                const imagePath = `/public/img/${message.image}`; // 이미지 경로 수정
                 let quantityImages = "";
 
                 if (typeof message === 'object' && message.name && message.quantity && message.price && message.image) {
@@ -142,16 +150,38 @@
             statusElement.textContent = message;
             statusElement.className = `status ${type}`;
         }
-
         function displayPopup() {
-            const popup = document.getElementById('payment-popup');
-            popup.style.display = 'block';
-        }
+    const popup = document.getElementById('payment-popup');
+    const overlay = document.getElementById('overlay');
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+}
 
-        function closePopup() {
-            const popup = document.getElementById('payment-popup');
-            popup.style.display = 'none';
-        }
+function closePopup() {
+    const popup = document.getElementById('payment-popup');
+    const overlay = document.getElementById('overlay');
+    popup.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
+function simulateTagging() {
+    const popupTitle = document.getElementById('popup-title');
+    popupTitle.innerHTML = "결제 진행 중...";
+    popupTitle.classList.remove('completed');
+    popupTitle.classList.add('processing');
+    document.getElementById('popup-image').src = "./img/dot.gif"; // 변경된 이미지
+    document.querySelector('.popup-next').onclick = simulateConfirmation;
+    document.querySelector('.popup-cancel').classList.remove('completed'); // 취소 버튼 위치 초기화
+}
+
+function simulateConfirmation() {
+    const popupTitle = document.getElementById('popup-title');
+    popupTitle.innerHTML = "결제가 완료되었습니다.<br>감사합니다.";
+    popupTitle.classList.remove('processing');
+    popupTitle.classList.add('completed');
+    document.getElementById('popup-image').src = "./img/check.gif"; // 변경된 이미지
+    document.querySelector('.popup-cancel').classList.add('completed'); // 취소 버튼 위치 조정
+}
 
         const ws = new WebSocket('ws://' + window.location.host + '/ws');
 
