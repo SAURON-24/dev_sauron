@@ -1,0 +1,349 @@
+/* 기본 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* 대시보드 레이아웃 */
+.dashboard {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 헤더 스타일 */
+.dashboard-header {
+    width: 100%;
+    background-color: #F6F2EF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    padding: 30px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.notification-btn {
+    height: 30px;
+    margin-left: 10px;
+}
+
+.happy-msg {
+    background-color: #ECE5DD;
+    padding: 16px 50px;
+    border-radius: 30px;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.mypage {
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 30px;
+}
+
+.notification-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    width: 380px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.logo {
+    text-align: center;
+    margin: 40px;
+}
+
+.logo img {
+    width: 180px;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu li {
+    margin: 10px 0;
+}
+
+.nav-line {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.li-line {
+    /* width: 300px; */
+
+}
+
+.myMarket-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.nav-title {
+    /* display: flex;
+    justify-content: space-between; */
+    background-color: #ECF8F1;
+    padding: 15px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #14AE5C;
+    width: 280px;
+    
+}
+
+.nav-title i {
+    margin-right: 10px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #8E8C88;
+    cursor: pointer;
+}
+
+.nav-item i {
+    margin-left: auto;
+}
+
+.header-title {
+    font-weight: 700;
+    font-size: 35px;
+}
+
+.dropdown-content {
+    display: none;
+    padding-left: 30px;
+
+}
+
+.dropdown-content a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: #8E8C88;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #2ecc71;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.dropdown-content .active-store {
+    background-color: #2ecc71;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* 메인 콘텐츠 스타일 */
+.dashboard-main {
+    flex: 1;
+    padding: 60px;
+    overflow-y: auto;
+    background-color: #F6F2EF;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 0px;
+    margin-top: 25px;
+}
+
+.liveTitle {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.commingListBox {
+    height: 1000px;
+}
+
+/* CCTV 섹션 */
+.cctv {
+    width: 650px;
+    height: 450px;
+    background-color: skyblue;
+    margin-left: 45px;
+}
+
+.store-title {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 고객 출입 이력 섹션 */
+.store-info {
+    background-color: #fff;
+    max-width: 80%;
+    height: 93%;
+    padding: 35px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    border-radius: 30px;
+}
+
+.store-selection {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.store-nameBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #FEF7E0;
+    height: 80px;
+    width: 100%;
+}
+
+.store-name {
+    font-weight: 900;
+    font-size: 25px;
+}
+
+.store-branch {
+    color: #757575;
+    font-size: 20px;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.liveBox {
+    width: 100%;
+    height: 70%;
+    border-radius: 30px;
+}
+
+.liveCctv {
+    background-color: #fff;
+    width: 60%;
+    border-radius: 30px;
+    height: 100%;
+}
+
+.topBox {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 30px;
+}
+
+.storeStatusBox {
+    background-color: #fff;
+    width: 40%;
+    border-radius: 30px;
+    height: 100%;
+}
+
+.bunchBtnBox {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 30px;
+    height: 60%;
+    margin-top: 40px;
+}
+
+.bunchBtn {
+    background-color: #fff;
+}
+
+.filter-btn, .date-picker {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.customer-log ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.customer-log ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.customer-log ul li img {
+    margin-right: 10px;
+}
+
+/* 매장 관리 현황 섹션 */
+.marketStatus {
+    width: 200px;
+    height: 450px;
+    background-color: skyblue;
+    margin-left: 45px;
+}
+
+.marketStoreStatus {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.no_dot {
+    list-style-type: none;
+    padding: 0 35px;
+}
+
+.sub-menu {
+    padding: 30px;
+    font-size: 20px;
+}
