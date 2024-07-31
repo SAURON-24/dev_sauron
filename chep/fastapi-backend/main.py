@@ -1,16 +1,16 @@
+import os
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any
-import os
 
 app = FastAPI()
 
-# CORS 미들웨어 추가
+# CORS 설정 추가
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 모든 출처 허용
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -33,10 +33,10 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
-# Initial balance for user card
+# 초기 유저 잔액 설정
 user_balance = 100000
 
-# Product prices and images
+# 제품 가격 및 이미지 설정
 product_prices = {
     "국간장": {"price": 200, "quantity": 0, "image": "guk.png"},
     "진간장": {"price": 300, "quantity": 0, "image": "jin.png"},
@@ -44,14 +44,14 @@ product_prices = {
     "우유": {"price": 500, "quantity": 0, "image": "milk.png"}
 }
 
-# Sample UID mappings (these should be unique UIDs of your NFC tags)
+# 샘플 UID 매핑 설정
 uids = {
-    "user_card": "D99EFA29",       # Example UID for user card
-    "admin_card": "708D1A1A",      # Example UID for admin card
-    "국간장": "5B393609",            # Example UID for product 1
-    "진간장": "CB78D015",            # Example UID for product 2
-    "설탕": "F4A5BD49",              # Example UID for product 3
-    "우유": "09B6FB62"               # Example UID for product 4
+    "user_card": "D99EFA29",
+    "admin_card": "708D1A1A",
+    "국간장": "5B393609",
+    "진간장": "CB78D015",
+    "설탕": "F4A5BD49",
+    "우유": "09B6FB62"
 }
 
 admin_info = {
@@ -69,7 +69,7 @@ user_info = {
     "uid": uids["user_card"]
 }
 
-# Store detected objects
+# 감지된 객체 저장
 detected_objects: List[Dict[str, Any]] = []
 
 class NFCTag(BaseModel):
@@ -141,7 +141,7 @@ async def websocket_endpoint(websocket: WebSocket):
     except WebSocketDisconnect:
         manager.disconnect(websocket)
 
-# Adjust the path to public directory
+# 정적 파일 제공 설정
 current_directory = os.path.dirname(os.path.abspath(__file__))
 public_directory = os.path.join(current_directory, "../public")
 
@@ -149,4 +149,4 @@ app.mount("/public", StaticFiles(directory=public_directory), name="public")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
