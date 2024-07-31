@@ -33,9 +33,10 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #ffffff;
-    font-size: 38px;
+    background-color: #202632;
+    font-size: 40px;
     font-weight: bold;
+    color: #fff;
 }
 
 .hamburger,
@@ -44,6 +45,7 @@ body {
     border: none;
     font-size: 1.5em;
     cursor: pointer;
+    color: #fff;
 }
 
 .container {
@@ -51,7 +53,7 @@ body {
     
     margin: 0 auto;
     padding: 30px;
-    background-color: #F6F2EF;
+    background-color: #F2F4F6;
     max-height: 1920px;
 }
 .wrapper {
@@ -111,7 +113,7 @@ body {
     margin: 40px 0;
     border: 3px solid #a19b8f;
     border-radius: 30px;
-    font-size: 38px;
+    font-size: 40px;
 }
 
 .moneyBtnBox {
@@ -131,10 +133,10 @@ button {
 .moneyBtn_cencle {
     flex: 1;
     margin-right: 12px;
-    background-color: #C3BCAD;
+    background-color: #FBBC05;
     border-radius: 50px;
     padding: 8.5rem 1rem; /* 위아래 여백을 더 크게 설정 */
-    font-size: 38px;
+    font-size: 40px;
     font-weight: 700;
     color: #fff;
 }
@@ -142,11 +144,11 @@ button {
 .moneyBtn_fix {
     flex: 1;
     margin-left: 12px;
-    background-color: #464440;
+    background-color: #34A853;
     border-radius: 50px;
     padding: 8.5rem 1rem; /* 위아래 여백을 더 크게 설정 */
     min-height: 50px;
-    font-size: 38px;
+    font-size: 40px;
     font-weight: 700;
     color: #fff;
 }
@@ -216,7 +218,7 @@ button {
     background-color: #ECE5DD;
     border-radius: 50px;
     max-height: 50px;
-    font-size: 30px; 
+    font-size: 40px;
     padding: 40px 0;
     margin: 8px 0;
 }

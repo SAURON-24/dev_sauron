@@ -1,9 +1,20 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Dict, Any
+import os
 
 app = FastAPI()
+
+# CORS 미들웨어 추가
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 모든 출처 허용
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ConnectionManager:
     def __init__(self):
@@ -111,7 +122,7 @@ def clear_detected_objects():
 
 @app.post("/start-payment")
 async def start_payment():
-    message = "Start payment process"
+    message = "User card detected"
     await manager.broadcast(message)
     return {"message": message}
 
@@ -130,8 +141,12 @@ async def websocket_endpoint(websocket: WebSocket):
     except WebSocketDisconnect:
         manager.disconnect(websocket)
 
+# Adjust the path to public directory
+current_directory = os.path.dirname(os.path.abspath(__file__))
+public_directory = os.path.join(current_directory, "../public")
+
+app.mount("/public", StaticFiles(directory=public_directory), name="public")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
-app.mount("/img", StaticFiles(directory="../public/img"), name="img")
