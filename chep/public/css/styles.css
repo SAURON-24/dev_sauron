@@ -184,20 +184,22 @@ button {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
+    border-radius: 40px;
     text-align: center;
     z-index: 1000;
-    width: 800px;
-    height: 700px;
+    width: 900px;
+    height: 900px;
 }
+
 
 .popup-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;  /* 세로 정렬을 위해 수정 */
+    justify-content: space-around; /* 세로 정렬을 위한 공간 분배 */
     height: 100%;
 }
+
 
 .popup-title {
     padding:40px;
@@ -212,7 +214,7 @@ button {
 
 .popup-image {
     width: auto; /* 너비를 자동으로 조정 */
-    height: 273px; /* 높이를 273px로 설정 */
+    height: 436px; /* 높이를 273px로 설정 */
     margin-bottom: 40px;
 }
 
