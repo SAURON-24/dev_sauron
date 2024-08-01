@@ -23,27 +23,30 @@
             </div>
             <div class="inBox">
                 <div id="detected-tags"></div>
-                <h2 class="question"><span class="black-text">위 목록이 장바구니에 담긴 물건이<br></span><span class="red-text">맞습니까?</span></h2>
-                <div class="totalBox">
-                    <span>합계</span>
-                    <span id="total-items">0개</span>
-                    <span id="total-price">0원</span>
-                </div>
             </div>
 
-            <div class="moneyBtnBox">
-                <button class="moneyBtn_cencle">
-                    <div class="iconBox" style="margin-top: 10px">
-                        <img src="./img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">결제 취소
+                <div class="white-layout">
+                    <h2 class="question"><span class="black-text">위 목록이 장바구니에 담긴 물건이<br></span><span class="red-text">맞습니까?</span></h2>
+                    <div class="totalBox">
+                        <span>합계</span>
+                        <span id="total-items">0개</span>
+                        <span id="total-price">0원</span>
                     </div>
-                </button>
-                <button class="moneyBtn_fix" onclick="startPayment()">
-                    <div class="iconBox">
-                        <img src="./img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">결제 진행
+                    <div class="moneyBtnBox">
+                        <button class="moneyBtn_cencle">
+                            <div class="iconBox" style="margin-top: 10px">
+                                <img src="./img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">결제 취소
+                            </div>
+                        </button>
+                        <button class="moneyBtn_fix" onclick="startPayment()">
+                            <div class="iconBox">
+                                <img src="./img/check_4.png" style="margin: 15px 0;" alt="결제진행" class="icon">결제 진행
+                            </div>
+                        </button>
                     </div>
-                </button>
-            </div>
+                </div>
         </section>
+
         
         <div id="payment-popup" class="popup">
             <div class="popup-content">
@@ -56,7 +59,6 @@
 
         <div id="overlay" class="overlay"></div>
     </div>
-
     <script>
         async function loadDetectedObjects() {
             try {

@@ -8,26 +8,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#detected-tags {
-    height: 770px; 
-    overflow-y: auto; /* 내부 스크롤바 생성 */
-    font-size: 30px; 
+.wrapper {
+    width: 1080px;
+    height: 1920px;
+    background-color: #F6F2EF;
+    overflow: auto; /* 내부 스크롤바 생성 */
 }
 
-.detected-tag {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0; /* 상하 여백 추가 */
-    border-bottom: 0.5px solid #DAC7B1; /* 항목 사이에 구분선 추가 */
-}
-.detected-tag div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
-    text-align: center; /* 중앙 정렬 */
-    height: 70px;
-}
 .headerBox {
     display: flex;
     justify-content: space-between;
@@ -50,59 +37,36 @@ body {
 
 .container {
     min-width: 800px;
-    
     margin: 0 auto;
-    padding: 30px;
+    /* padding: 30px; */
     background-color: #F2F4F6;
     max-height: 1920px;
 }
-.wrapper {
-    width: 1080px;
-    height: 1920px;
-    background-color: #F6F2EF;
-    overflow: auto; /* 내부 스크롤바 생성 */
-}
 
-.orderTable {
-    width: 100%;
-    border-collapse: collapse;
-    max-height: 300px;
-    overflow-y: auto;
-    display: block;
-}
-
-.orderTable th,
-.orderTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.orderTable th {
-    background-color: #f2f2f2;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
-
-.product-name {
-    font-weight: bold; /* 상품명을 볼드체로 설정 */
-}
-
-.question {
+.listInfo {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    height: 120px;
-    text-align: center;
-    color: #f44336;;
-    margin: 110px 0;
-    font-size: 45px;
+    background-color: #fff;
+    border-radius: 50px;
+    max-height: 50px;
+    font-size: 40px;
+    padding: 40px 0;
+    margin: 30px;
+    
 }
 
 .inBox {
-    padding: 0 40px;
+    padding: 0 90px;
+}
+
+.white-layout {
+    background-color: #fff;
+    border-radius: 103px;
+    /* padding: 2px 0; */
+    margin-top: 20px;
+    width: 100%;
+    padding: 22px;
 }
 
 .totalBox {
@@ -120,7 +84,6 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-
 }
 
 button {
@@ -149,7 +112,7 @@ button {
     margin-left: 12px;
     background-color: #34A853;
     border-radius: 50px;
-    padding: 8.5rem 1rem; /* 위아래 여백을 더 크게 설정 */
+    padding: 7.5rem 1rem; /* 위아래 여백을 더 크게 설정 */
     min-height: 50px;
     font-size: 40px;
     font-weight: 700;
@@ -171,62 +134,45 @@ button {
 
 .black-text {
     color: #464440;
+    
 }
 
-.status {
-    margin: 20px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
+#detected-tags {
+    height: 770px; 
+    overflow-y: auto; /* 내부 스크롤바 생성 */
+    font-size: 30px; 
 }
 
-.status.success {
-    border-color: #4CAF50;
-    background-color: #e8f5e9;
-}
-
-.status.error {
-    border-color: #F44336;
-    background-color: #ffebee;
-}
-
-.info {
-    margin: 20px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-}
-
-.info.admin {
-    border-color: #2196F3;
-    background-color: #e3f2fd;
-}
-
-.info.user {
-    border-color: #FF9800;
-    background-color: #fff3e0;
-}
-
-.user-info,
-.admin-info {
-    display: none;
-}
-
-.user-info p,
-.admin-info p {
-    margin: 5px 0;
-}
-
-.listInfo {
+.detected-tag {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 8px 0; /* 상하 여백 추가 */
+    border-bottom: 0.5px solid #DAC7B1; /* 항목 사이에 구분선 추가 */
+}
+
+.detected-tag div {
+    display: flex;
     align-items: center;
-    background-color: #fff;
-    border-radius: 50px;
-    max-height: 50px;
-    font-size: 40px;
-    padding: 40px 0;
-    margin: 8px 0;
+    justify-content: center;
+    width: 30%;
+    text-align: center; /* 중앙 정렬 */
+    height: 70px;
+}
+
+.product-name {
+    font-weight: bold; /* 상품명을 볼드체로 설정 */
+}
+
+.question {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    height: 120px;
+    text-align: center;
+    color: #f44336;
+    margin: 110px 0;
+    font-size: 50px;
 }
 
 .popup {
@@ -263,10 +209,6 @@ button {
 .popup-title.processing {
     color: black;
 }
-
-/* .popup-image.completed {
-    margin-bottom:0px;
-} */
 
 .popup-image {
     width: auto; /* 너비를 자동으로 조정 */
