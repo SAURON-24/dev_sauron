@@ -23,33 +23,31 @@
             </div>
             <div class="inBox">
                 <div id="detected-tags"></div>
-                <!-- <div class="taglist"></div> -->
             </div>
 
-                <!-- <div class="white-layout"> -->
-                    <div class="totalBox">
-                        <span>합계</span>
-                        <span id="total-items">0개</span>
-                        <span id="total-price">0원</span>
-                    </div>
+            <div class="totalBox">
+                <span>합계</span>
+                <span id="total-items">0개</span>
+                <span id="total-price">0원</span>
+            </div>
 
-                    <div class="question"><span class="black-text">이 물건들이 </span><span class="red-text"> 맞으신가요?</span></div>
+            <div class="question"><span class="black-text">이 물건들이 </span><span class="red-text"> 맞으신가요?</span></div>
 
-                    <div class="moneyBtnBox">
-                        <button class="moneyBtn_cencle">
-                            <div class="iconBox" style="margin-top: 10px">
-                                <img src="./img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">아니오
-                            </div>
-                        </button>
-                        <button class="moneyBtn_fix" onclick="startPayment()">
-                            <div class="iconBox">
-                                <img src="./img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">예
-                            </div>
-                        </button>
+            <div class="moneyBtnBox">
+                <button class="moneyBtn_cencle">
+                    <div class="iconBox" style="margin-top: 10px">
+                        <img src="./img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">아니오
                     </div>
-                <!-- </div> -->
+                </button>
+                <button class="moneyBtn_fix" onclick="startPayment()">
+                    <div class="iconBox">
+                        <img src="./img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">예
+                    </div>
+                </button>
+            </div>
         </section>
 
+        <div id="status" class="status"></div> <!-- Status element added -->
         
         <div id="payment-popup" class="popup">
             <div class="popup-content">
@@ -63,9 +61,11 @@
         <div id="overlay" class="overlay"></div>
     </div>
     <script>
+        const apiUrl = 'http://3.38.221.183:8000'; // FastAPI 서버 URL
+
         async function loadDetectedObjects() {
             try {
-                const response = await fetch('/detected-objects');
+                const response = await fetch(`${apiUrl}/detected-objects`);
                 if (response.ok) {
                     const objects = await response.json();
                     displayDetectedObjects(objects);
@@ -80,7 +80,7 @@
 
         async function clearDetectedObjects() {
             try {
-                const response = await fetch('/clear-detected-objects', {
+                const response = await fetch(`${apiUrl}/clear-detected-objects`, {
                     method: 'POST',
                 });
                 if (response.ok) {
@@ -95,24 +95,33 @@
         }
 
         async function startPayment() {
-            const response = await fetch('/start-payment', { method: 'POST' });
-            if (response.ok) {
-                displayPopup();
-            } else {
-                const errorMessage = await response.text();
-                displayStatus(`Failed to start payment: ${errorMessage}`, 'error');
+            try {
+                const response = await fetch(`${apiUrl}/start-payment`, { method: 'POST' });
+                if (response.ok) {
+                    console.log('Payment started successfully');
+                    displayPopup();
+                } else {
+                    const errorMessage = await response.text();
+                    displayStatus(`Failed to start payment: ${errorMessage}`, 'error');
+                }
+            } catch (error) {
+                displayStatus(`Error: ${error.message}`, 'error');
             }
         }
 
         async function confirmPayment() {
-            const response = await fetch('/confirm-payment', { method: 'POST' });
-            if (response.ok) {
-                const data = await response.json();
-                displayStatus(data.message, 'success');
-                closePopup();
-            } else {
-                const errorMessage = await response.text();
-                displayStatus(`Failed to confirm payment: ${errorMessage}`, 'error');
+            try {
+                const response = await fetch(`${apiUrl}/confirm-payment`, { method: 'POST' });
+                if (response.ok) {
+                    const data = await response.json();
+                    displayStatus(data.message, 'success');
+                    closePopup();
+                } else {
+                    const errorMessage = await response.text();
+                    displayStatus(`Failed to confirm payment: ${errorMessage}`, 'error');
+                }
+            } catch (error) {
+                displayStatus(`Error: ${error.message}`, 'error');
             }
         }
 
@@ -155,66 +164,75 @@
             statusElement.textContent = message;
             statusElement.className = `status ${type}`;
         }
+
         function displayPopup() {
-    const popup = document.getElementById('payment-popup');
-    const overlay = document.getElementById('overlay');
-    popup.style.display = 'block';
-    overlay.style.display = 'block';
-}
+            console.log('Displaying popup');
+            const popup = document.getElementById('payment-popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        }
 
-function closePopup() {
-    const popup = document.getElementById('payment-popup');
-    const overlay = document.getElementById('overlay');
-    popup.style.display = 'none';
-    overlay.style.display = 'none';
-}
+        function closePopup() {
+            console.log('Closing popup');
+            const popup = document.getElementById('payment-popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
 
-function simulateTagging() {
-    const popupTitle = document.getElementById('popup-title');
-    popupTitle.innerHTML = "결제 진행 중...";
-    popupTitle.classList.remove('completed');
-    popupTitle.classList.add('processing');
-    document.getElementById('popup-image').src = "./img/dot.gif"; // 변경된 이미지
-    document.querySelector('.popup-next').onclick = simulateConfirmation;
-    document.querySelector('.popup-cancel').classList.remove('completed'); // 취소 버튼 위치 초기화
-}
+        function simulateTagging() {
+            const popupTitle = document.getElementById('popup-title');
+            popupTitle.innerHTML = "결제 진행 중...";
+            popupTitle.classList.remove('completed');
+            popupTitle.classList.add('processing');
+            document.getElementById('popup-image').src = "./img/dot.gif"; // 변경된 이미지
+            document.querySelector('.popup-next').onclick = simulateConfirmation;
+            document.querySelector('.popup-cancel').classList.remove('completed'); // 취소 버튼 위치 초기화
+        }
 
-function simulateConfirmation() {
-    const popupTitle = document.getElementById('popup-title');
-    popupTitle.innerHTML = "결제가 완료되었습니다.<br>감사합니다.";
-    popupTitle.classList.remove('processing');
-    popupTitle.classList.add('completed');
-    document.getElementById('popup-image').src = "./img/check.gif"; // 변경된 이미지
-    document.querySelector('.popup-cancel').classList.add('completed'); // 취소 버튼 위치 조정
-}
+        document.querySelector('.moneyBtn_fix').onclick = startPayment;
 
-        const ws = new WebSocket('ws://' + window.location.host + '/ws');
+        function simulateConfirmation() {
+            const popupTitle = document.getElementById('popup-title');
+            popupTitle.innerHTML = "결제가 완료되었습니다.<br>감사합니다.";
+            popupTitle.classList.remove('processing');
+            popupTitle.classList.add('completed');
+            document.getElementById('popup-image').src = "./img/check.gif"; // 변경된 이미지
+            document.querySelector('.popup-cancel').classList.add('completed'); // 취소 버튼 위치 조정
+        }
+
+        const ws = new WebSocket(`ws://${window.location.hostname}:8000/ws`);
 
         ws.onopen = function(event) {
             console.log('WebSocket connection opened');
         };
 
         ws.onmessage = function(event) {
-            const message = JSON.parse(event.data);
-            console.log('Received WebSocket message:', message);
+            try {
+                const message = JSON.parse(event.data);
+                console.log('Received WebSocket message:', message);
 
-            const tagId = message.tagId;
-            const now = new Date().getTime();
-            const lastTaggedTime = lastTaggedTimes[tagId] || 0;
+                const tagId = message.tagId;
+                const now = new Date().getTime();
+                const lastTaggedTime = lastTaggedTimes[tagId] || 0;
 
-            if (now - lastTaggedTime > 3000) { // 3초 간격을 두고 태깅
-                lastTaggedTimes[tagId] = now;
-                loadDetectedObjects();
-                if (message.message.includes('User card detected')) {
-                    confirmPayment();
+                if (now - lastTaggedTime > 3000) { // 3초 간격을 두고 태깅
+                    lastTaggedTimes[tagId] = now;
+                    loadDetectedObjects();
+                    if (message.message.includes('User card detected')) {
+                        confirmPayment();
+                    }
                 }
+            } catch (e) {
+                console.error('Error parsing WebSocket message:', e);
             }
         };
 
         ws.onclose = function(event) {
             console.log('WebSocket connection closed, retrying in 3 seconds');
             setTimeout(function() {
-                ws = new WebSocket('ws://' + window.location.host + '/ws');
+                ws = new WebSocket(`ws://${window.location.hostname}:8000/ws`);
             }, 3000);
         };
 
