@@ -9,9 +9,10 @@ body {
 }
 
 .wrapper {
+    padding: 10px;
     width: 1080px;
     height: 1920px;
-    background-color: #F6F2EF;
+    background-image: linear-gradient(to bottom, #E8F2FF, #FFFFFF);
     overflow: auto; /* 내부 스크롤바 생성 */
 }
 
@@ -19,11 +20,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
     background-color: #202632;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: bold;
     color: #fff;
+    padding: 50px;
 }
 
 .hamburger,
@@ -39,8 +40,9 @@ body {
     min-width: 800px;
     margin: 0 auto;
     /* padding: 30px; */
-    background-color: #F2F4F6;
+    /* background-color: #F2F4F6; */
     max-height: 1920px;
+    /* padding: 10px; */
 }
 
 .listInfo {
@@ -50,14 +52,20 @@ body {
     background-color: #fff;
     border-radius: 50px;
     max-height: 50px;
-    font-size: 40px;
-    padding: 40px 0;
+    font-size: 46px;
+    padding: 50px 0;
     margin: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+
     
 }
 
 .inBox {
-    padding: 0 90px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+    border-radius: 50px;
+margin: 30px;
+
 }
 
 .white-layout {
@@ -73,17 +81,22 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 15px 10px;
-    margin: 40px 0;
-    border: 3px solid #a19b8f;
+    padding: 15px;
+    margin: 40px 40px;
+    border: 3px solid #F24822;
     border-radius: 30px;
     font-size: 40px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+
+    
 }
 
 .moneyBtnBox {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    margin:30px;
 }
 
 button {
@@ -96,30 +109,37 @@ button {
 .moneyBtn_cencle {
     flex: 1;
     margin-right: 12px;
-    background-color: #FBBC05;
+    background-color: #F24822;
     border-radius: 50px;
     padding: 8.5rem 1rem; /* 위아래 여백을 더 크게 설정 */
-    font-size: 40px;
+    font-size: 70px;
     font-weight: 700;
     color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+
 }
 .moneyBtn_cencle:hover {
     background-color: #b08402;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 호버 상태에서 그림자 효과 강화 */
+
 }
 
 .moneyBtn_fix {
     flex: 1;
     margin-left: 12px;
-    background-color: #34A853;
+    background-color: #FABD05;
     border-radius: 50px;
     padding: 7.5rem 1rem; /* 위아래 여백을 더 크게 설정 */
     min-height: 50px;
-    font-size: 40px;
+    font-size: 70px;
     font-weight: 700;
     color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+
 }
 .moneyBtn_fix:hover {
     background-color: #227438;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 호버 상태에서 그림자 효과 강화 */
 }
 
 .iconBox {
@@ -134,11 +154,12 @@ button {
 
 .black-text {
     color: #464440;
+    margin-right: 20px;
     
 }
 
 #detected-tags {
-    height: 770px; 
+    height: 670px; 
     overflow-y: auto; /* 내부 스크롤바 생성 */
     font-size: 30px; 
 }
@@ -165,14 +186,16 @@ button {
 
 .question {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    justify-content: center;
+    /* flex-direction: column; */
     align-items: center;
     height: 136px;
     text-align: center;
     color: #f44336;
-    margin: 77px 0;
-    font-size: 50px;
+    margin: 70px 0;
+    font-size: 70px;
+    font-weight: 700;
+
 }
 
 .popup {
