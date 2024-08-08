@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: url('../img/그래픽바탕.png') no-repeat center center fixed;
+    background: url('../img/그래픽바탕2.png') no-repeat center center fixed;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -14,13 +14,13 @@ body {
     border-radius: 40px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 60px 60px;
+    padding: 30px;
     width: 70%;
     max-width: 700px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 80%;
+    height: auto;
 }
 
 .header {
@@ -28,13 +28,12 @@ body {
     flex-direction: column;
     justify-content: center;
     margin-bottom: 20px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .logo {
     width: 200px;
     margin: 30px;
-
 }
 
 h1 {
@@ -43,23 +42,33 @@ h1 {
     color: #202632;
 }
 
+.main-content {
+    margin-bottom: 50px;
+}
+
 .main-content p {
-    font-size: 30px;
-    color: white;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 40px;
+    margin: 20px;
     font-weight: 700;
-    /* padding-top: 115px; */
+    
 }
+
 
 .button-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* 버튼들을 가운데 정렬 */
     align-items: center;
     gap: 15px;
+    width: 100%;
+    min-width: 600px;
+}
+
+.main_text {
+font-size: 27px;
 }
 
 button {
@@ -68,30 +77,33 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 30px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.1s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 200px;
-    height: 250px;
+    width: 70%; /* 버튼의 너비를 container의 70%로 설정 */
+    height: 550px; /* 버튼 높이 설정 */
     text-align: center;
 }
 
+
 button img {
     max-width: 185px;
-    margin-bottom: 10px; /* 이미지와 텍스트 사이 간격 조정 */
+    margin-bottom: 10px;
 }
 
 button p {
-    margin: 5px 0 0 0; /* 텍스트 상단 마진 조정 */
+    margin: 5px 0 0 0;
+}
+
+button:active {
+    transform: scale(0.95); /* 버튼을 클릭할 때 크기 감소 */
 }
 
 .large-text {
     background-color: #0064FF;
     color: #fff;
-    height: 650px;
-    width: 350px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -102,8 +114,6 @@ button p {
 .standard {
     background-color: #202632;
     color: #fff;
-    height: 650px;
-    width: 350px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
