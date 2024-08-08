@@ -3,240 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
-    <script src="https://kit.fontawesome.com/cbcad42a26.js" crossorigin="anonymous"></script>
-    <title>UID 결제 시스템</title>
+    <title>사용자 맞춤 설정</title>
+    <link rel="stylesheet" href="css/open.css"> <!-- CSS 경로 확인 -->
 </head>
 <body>
-    <div class="wrapper">
-        <header class="headerBox">
-            <button class="hamburger" onclick="clearDetectedObjects()">☰</button>
-            <p>주문을 확인해주세요</p>
-            <button class="addButton">+</button>
+    <div class="container">
+        <header class="header">
+            <img src="img/seesaw_logo2.png" alt="Logo" class="logo"> <!-- 이미지 경로 확인 -->
+            <!-- <h1>사용자 맞춤 설정</h1> -->
         </header>
-
-        <section class="container">
-            <div class="listInfo">
-                <h4>상품명</h4>
-                <h4>수량</h4>
-                <h4>금액</h4>
-            </div>
-            <div class="inBox">
-                <div id="detected-tags"></div>
-            </div>
-
-            <div class="totalBox">
-                <span>합계</span>
-                <span id="total-items">0개</span>
-                <span id="total-price">0원</span>
-            </div>
-
-            <div class="question"><span class="black-text">이 물건들이 </span><span class="red-text"> 맞으신가요?</span></div>
-
-            <div class="moneyBtnBox">
-                <button class="moneyBtn_cencle">
-                    <div class="iconBox" style="margin-top: 10px">
-                        <img src="./img/back.png" style="margin: 20px 0;" alt="결제취소" class="icon" style="margin-bottom: 8px">아니오
-                    </div>
+        <main class="main-content">
+            <p class="description_title" style="color: #202632;">더 나은 이용을 위해 화면 설정을 선택해주세요.</p>
+            <div class="button-container">
+                <button class="large-text" id="large-text-btn">
+                    <img class= "img_icon" src="./img/돋보기2.png" alt="큰 글씨와 선명한 화면" style="margin-top: 40px;" >
+                    <p class="main_text"> 큰 글씨와<br>선명한 화면</p> <!-- 이미지 경로 확인 -->
                 </button>
-                <button class="moneyBtn_fix" onclick="startPayment()">
-                    <div class="iconBox">
-                        <img src="./img/check_4.png" style="margin: 20px 0;" alt="결제진행" class="icon">예
-                    </div>
+                <button class="standard" id="standard-btn">
+                    <img src="./img/eyes.png" alt="표준 화면" style="margin-bottom: 20px;" > <!-- 이미지 경로 확인 -->
+                    <p class="main_text">표준 화면</p>
                 </button>
             </div>
-        </section>
-
-        <div id="status" class="status"></div> <!-- Status element added -->
-        
-        <div id="payment-popup" class="popup">
-            <div class="popup-content">
-                <div class="popup-title" id="popup-title">신용카드를 리더기에 대주세요.</div>
-                <img src="./img/태깅4.gif" alt="Credit Card" class="popup-image" id="popup-image">
-                <button class="popup-cancel" onclick="closePopup()">취소</button>
-                <button class="popup-next" onclick="simulateTagging()">다음</button>
-            </div>
-        </div>
-
-        <div id="overlay" class="overlay"></div>
+        </main>
     </div>
+
     <script>
-        const apiUrl = 'http://3.38.221.183:8000'; // FastAPI 서버 URL
+        document.getElementById('large-text-btn').addEventListener('click', function() {
+            localStorage.setItem('mode', 'senior');
+            window.location.href = 'touch.html';
+        });
 
-        async function loadDetectedObjects() {
-            try {
-                const response = await fetch(`${apiUrl}/detected-objects`);
-                if (response.ok) {
-                    const objects = await response.json();
-                    displayDetectedObjects(objects);
-                } else {
-                    const errorMessage = await response.text();
-                    displayStatus(`Failed to load detected objects: ${errorMessage}`, 'error');
-                }
-            } catch (error) {
-                displayStatus(`Error: ${error.message}`, 'error');
-            }
-        }
-
-        async function clearDetectedObjects() {
-            try {
-                const response = await fetch(`${apiUrl}/clear-detected-objects`, {
-                    method: 'POST',
-                });
-                if (response.ok) {
-                    loadDetectedObjects();  // 감지된 객체 목록을 다시 로드하여 화면을 업데이트
-                } else {
-                    const errorMessage = await response.text();
-                    displayStatus(`Failed to clear detected objects: ${errorMessage}`, 'error');
-                }
-            } catch (error) {
-                displayStatus(`Error: ${error.message}`, 'error');
-            }
-        }
-
-        async function startPayment() {
-            try {
-                const response = await fetch(`${apiUrl}/start-payment`, { method: 'POST' });
-                if (response.ok) {
-                    console.log('Payment started successfully');
-                    displayPopup();
-                } else {
-                    const errorMessage = await response.text();
-                    displayStatus(`Failed to start payment: ${errorMessage}`, 'error');
-                }
-            } catch (error) {
-                displayStatus(`Error: ${error.message}`, 'error');
-            }
-        }
-
-        async function confirmPayment() {
-            try {
-                const response = await fetch(`${apiUrl}/confirm-payment`, { method: 'POST' });
-                if (response.ok) {
-                    const data = await response.json();
-                    displayStatus(data.message, 'success');
-                    closePopup();
-                } else {
-                    const errorMessage = await response.text();
-                    displayStatus(`Failed to confirm payment: ${errorMessage}`, 'error');
-                }
-            } catch (error) {
-                displayStatus(`Error: ${error.message}`, 'error');
-            }
-        }
-
-        function displayDetectedObjects(objects) {
-            const detectedTagsDiv = document.getElementById('detected-tags');
-            detectedTagsDiv.innerHTML = '';  // 기존 목록을 비움
-            let latestMessage = '';
-
-            let totalItems = 0;
-            let totalPrice = 0;
-
-            objects.forEach(obj => {
-                const tagDiv = document.createElement('div');
-                tagDiv.classList.add('detected-tag');
-                const message = obj.message;
-                const imagePath = `/public/img/${message.image}`; // 이미지 경로 수정
-                let quantityImages = "";
-
-                if (typeof message === 'object' && message.name && message.quantity && message.price && message.image) {
-                    for (let i = 0; i < message.quantity; i++) {
-                        quantityImages += `<img src="${imagePath}" alt="${message.name}" style="width: 30px; height: 30px;">`;
-                    }
-                    tagDiv.innerHTML = `<div class="product-name">${message.name}</div><div>${quantityImages}</div><div>${message.price}원</div>`;
-                    totalItems += message.quantity;
-                    totalPrice += message.quantity * message.price;
-                } else {
-                    tagDiv.innerHTML = `<div class="product-name">${message}</div><div></div><div></div>`;
-                }
-                detectedTagsDiv.appendChild(tagDiv);
-
-                latestMessage = message.name || message;
-            });
-
-            document.getElementById('total-items').textContent = `${totalItems}개`;
-            document.getElementById('total-price').textContent = `${totalPrice.toLocaleString()}원`;
-        }
-
-        function displayStatus(message, type) {
-            const statusElement = document.getElementById('status');
-            statusElement.textContent = message;
-            statusElement.className = `status ${type}`;
-        }
-
-        function displayPopup() {
-            console.log('Displaying popup');
-            const popup = document.getElementById('payment-popup');
-            const overlay = document.getElementById('overlay');
-            popup.style.display = 'block';
-            overlay.style.display = 'block';
-        }
-
-        function closePopup() {
-            console.log('Closing popup');
-            const popup = document.getElementById('payment-popup');
-            const overlay = document.getElementById('overlay');
-            popup.style.display = 'none';
-            overlay.style.display = 'none';
-        }
-
-        function simulateTagging() {
-            const popupTitle = document.getElementById('popup-title');
-            popupTitle.innerHTML = "결제 진행 중...";
-            popupTitle.classList.remove('completed');
-            popupTitle.classList.add('processing');
-            document.getElementById('popup-image').src = "./img/dot.gif"; // 변경된 이미지
-            document.querySelector('.popup-next').onclick = simulateConfirmation;
-            document.querySelector('.popup-cancel').classList.remove('completed'); // 취소 버튼 위치 초기화
-        }
-
-        document.querySelector('.moneyBtn_fix').onclick = startPayment;
-
-        function simulateConfirmation() {
-            const popupTitle = document.getElementById('popup-title');
-            popupTitle.innerHTML = "결제가 완료되었습니다.<br>감사합니다.";
-            popupTitle.classList.remove('processing');
-            popupTitle.classList.add('completed');
-            document.getElementById('popup-image').src = "./img/check.gif"; // 변경된 이미지
-            document.querySelector('.popup-cancel').classList.add('completed'); // 취소 버튼 위치 조정
-        }
-
-        const ws = new WebSocket(`ws://${window.location.hostname}:8000/ws`);
-
-        ws.onopen = function(event) {
-            console.log('WebSocket connection opened');
-        };
-
-        ws.onmessage = function(event) {
-            try {
-                const message = JSON.parse(event.data);
-                console.log('Received WebSocket message:', message);
-
-                const tagId = message.tagId;
-                const now = new Date().getTime();
-                const lastTaggedTime = lastTaggedTimes[tagId] || 0;
-
-                if (now - lastTaggedTime > 3000) { // 3초 간격을 두고 태깅
-                    lastTaggedTimes[tagId] = now;
-                    loadDetectedObjects();
-                    if (message.message.includes('User card detected')) {
-                        confirmPayment();
-                    }
-                }
-            } catch (e) {
-                console.error('Error parsing WebSocket message:', e);
-            }
-        };
-
-        ws.onclose = function(event) {
-            console.log('WebSocket connection closed, retrying in 3 seconds');
-            setTimeout(function() {
-                ws = new WebSocket(`ws://${window.location.hostname}:8000/ws`);
-            }, 3000);
-        };
-
-        window.onload = loadDetectedObjects;
+        document.getElementById('standard-btn').addEventListener('click', function() {
+            localStorage.setItem('mode', 'normal');
+            window.location.href = 'touch.html';
+        });
     </script>
 </body>
 </html>
