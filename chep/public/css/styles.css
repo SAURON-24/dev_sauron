@@ -18,7 +18,7 @@ body {
 
 .headerBox {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: #202632;
     font-size: 60px;
