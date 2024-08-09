@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/touch.css"> <!-- CSS 경로 확인 -->
+    <title>올려주세요</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom, #E8F2FF, #FFFFFF);
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px;
+            width: 70%;
+            max-width: 700px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 상하단 여유 공간 */
+            align-items: center;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px;
+            margin-bottom: 80px;
+        }
+
+        .main-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 세로로 공간을 채우기 위해 사용 */
+            align-items: center;
+            flex-grow: 1; /* 여유 공간 차지 */
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 30px;
+            color: #202632;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            width: 70%; /* 버튼의 너비를 container의 70%로 설정 */
+            height: 100px; /* 버튼 높이 설정 */
+            text-align: center;
+        }
+
+        button:active {
+            transform: scale(0.95); /* 버튼을 클릭할 때 크기 감소 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>물건을 올려주세요</h1>
+        </header>
+        <main class="main-content">
+            <button class="description_title_top" style="color: #ffffff;" id="start-analysis">분석 시작</button>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('start-analysis').addEventListener('click', function() {
+            window.location.href = 'check.html';
+        });
+    </script>
+</body>
+</html>
