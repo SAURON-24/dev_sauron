@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +15,20 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-image: linear-gradient(to bottom, #E8F2FF, #FFFFFF);
+            flex-direction: column;
+            position: relative;
+        }
+
+        .img_wrapper {
+            position: absolute;
+            top: 10%;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .logo {
+            width: 200px;
         }
 
         .container {
@@ -25,64 +39,81 @@
             padding: 30px;
             width: 70%;
             max-width: 700px;
-            min-height: 300px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* 상하단 여유 공간 */
+            justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         .header {
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: 20px;
-            margin-bottom: 80px;
-        }
-
-        .main-content {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* 세로로 공간을 채우기 위해 사용 */
-            align-items: center;
-            flex-grow: 1; /* 여유 공간 차지 */
             margin-bottom: 20px;
         }
 
-        h1 {
-            margin: 0;
-            padding: 0;
-            font-size: 30px;
+        .header h1 {
+            margin: 10px 0;
+            font-size: 40px;
+            font-weight: 700;
             color: #202632;
+        }
+
+        .header h1 span {
+            color: #0064FF;
+            font-weight: 900;
+        }
+
+        .camera-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .camera-section img {
+            width: 749px;
+            margin-bottom: 20px;
         }
 
         button {
             padding: 20px;
-            font-size: 1.2rem;
+            font-size: 40px;
             cursor: pointer;
             border: none;
             border-radius: 30px;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            width: 70%; /* 버튼의 너비를 container의 70%로 설정 */
-            height: 100px; /* 버튼 높이 설정 */
+            background-color: #0064FF;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+            width: 70%;
+            height: 100px;
             text-align: center;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         button:active {
-            transform: scale(0.95); /* 버튼을 클릭할 때 크기 감소 */
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
+    <div class="img_wrapper">
+        <img src="img/seesaw_logo2.png" alt="Logo" class="logo">
+    </div>
     <div class="container">
         <header class="header">
-            <h1>물건을 올려주세요</h1>
+            <h1>정확한 인식을 위해</h1>
+            <h1><span>카메라</span> 앞에 물건을 올려주세요</h1>
         </header>
-        <main class="main-content">
-            <button class="description_title_top" style="color: #ffffff;" id="start-analysis">분석 시작</button>
-        </main>
+        <div class="camera-section">
+            <img src="img/line_check.png" alt="Camera">
+        </div>
+        <button id="start-analysis">분석 시작</button>
     </div>
 
     <script>
