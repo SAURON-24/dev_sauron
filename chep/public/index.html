@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사용자 맞춤 설정</title>
-    <link rel="stylesheet" href="css/open.css"> <!-- CSS 경로 확인 -->
+    <title>사용자 맞춤 설정 페이지</title>
+    <link rel="stylesheet" href="./css/open.css">
+    <link rel="icon" href="img/ss.ico" type="image/png"> 
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <img src="img/seesaw_logo.png" alt="Logo" class="logo"> <!-- 이미지 경로 확인 -->
-            <!-- <h1>사용자 맞춤 설정</h1> -->
+            <a href="index.html">
+                <img src="./img/seesaw_logo2.png" alt="Logo" style="width: 300px;">
+            </a>
         </header>
         <main class="main-content">
-            <p class="description_title_top" style="color: #202632; font-size: 27px;"  >더 나은 이용을 위해 화면 설정을 선택해주세요</p>
+            <p class="description_title_top">더 나은 이용을 위해</p>
+            <p class="description_title_middle">화면 설정을 선택해주세요</p>
             <div class="button-container">
-                <button class="large-text" id="large-text-btn">
-                    <img class= "img_icon" src="./img/eyes.png" alt="큰 글씨와 선명한 화면" style="margin-top: 40px;" >
-                    <p class="main_text"> 큰 글씨와<br>선명한 화면</p> <!-- 이미지 경로 확인 -->
-                </button>
                 <button class="standard" id="standard-btn">
-                    <img src="./img/컴퓨터2.png" alt="표준 화면" style="margin-top: 40px;"  > <!-- 이미지 경로 확인 -->
-                    <p class="main_text" >표준 화면</p>
+                    <img src="img/컴퓨터2.png" alt="표준 화면" class="standard-img">
+                    <p class="main_text">표준 화면</p>
+                </button>
+                <button class="large-text" id="large-text-btn">
+                    <img src="img/eyes.png" alt="저시력 화면" class="large-text-img">
+                    <p class="main_text">저시력</p>
+                    <p class="sub_text">큰 글씨와 선명한 화면</p>
+                </button>
+                <button class="under-text" id="low-vision-btn">
+                    <img src="img/chair.png" alt="저자세 화면" class="under-text-img">
+                    <p class="main_under_text">저자세</p>
+                    <p class="under_sub_text">눈높이를 낮추고 싶어요</p>
                 </button>
             </div>
         </main>
@@ -35,6 +44,11 @@
 
         document.getElementById('standard-btn').addEventListener('click', function() {
             localStorage.setItem('mode', 'normal');
+            window.location.href = 'touch.html';
+        });
+
+        document.getElementById('low-vision-btn').addEventListener('click', function() {
+            localStorage.setItem('mode', 'low-vision');
             window.location.href = 'touch.html';
         });
     </script>

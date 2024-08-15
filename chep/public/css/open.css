@@ -6,117 +6,197 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 1920px;
 }
 
-.container {
-    background-color: white;
-    border-radius: 40px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    padding: 30px;
-    width: 70%;
-    max-width: 700px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: auto;
+.sub_text {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    margin-top: 37px;
+    margin-left: 20px;
 }
 
-.header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
-
-.logo {
-    width: 200px;
-    margin: 30px;
-}
-
-h1 {
-    margin-top: 20px;
-    font-size: 30px;
+.under_text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 64px;
+    font-weight: bold;
     color: #202632;
 }
 
-.main-content {
-    margin-bottom: 50px;
+.under_sub_text {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #202632;
+    margin-top: 37px;
+    margin-left: 20px;
 }
 
-.main-content p {
-    color: #ffffff;
+.main_under_text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 64px;
+    font-weight: bold;
+    color: #202632;
+    margin-left: 20px;
+}
+
+.container {
+    background-color: transparent;
+    text-align: center;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    margin: 20px;
-    font-weight: 700;
-    
+    align-items: center;
 }
 
+.logo {
+    width: 323px;
+}
+
+.main-content {
+    width: 910px;
+    height: 1535px;
+    background-color: white;
+    border-radius: 60px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* gap: 20px; */
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.description_title_top {
+    font-size: 40px;
+    color: #333;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 0;
+    line-height: 1.2;
+    padding-bottom: 0;
+    margin-top:35px;
+}
+
+.description_title_middle {
+    font-size: 50px;
+    color: #333;
+    margin-top: 0;
+    text-align: center;
+    font-weight: 900;
+    line-height: 1.2;
+    padding-top: 0;
+    margin-bottom:35px;
+
+}
 
 .button-container {
     display: flex;
-    justify-content: center; /* 버튼들을 가운데 정렬 */
-    align-items: center;
+    flex-direction: column;
     gap: 15px;
     width: 100%;
-    min-width: 600px;
+    align-items: center;
+    /* margin-bottom: 30px; */
 }
 
 .main_text {
-font-size: 27px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 64px;
+    font-weight: bold;
+    color: white;
+    margin-left: 20px;
 }
 
 button {
-    padding: 20px;
-    font-size: 1.2rem;
     cursor: pointer;
     border: none;
-    border-radius: 30px;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    width: 70%; /* 버튼의 너비를 container의 70%로 설정 */
-    height: 550px; /* 버튼 높이 설정 */
-    text-align: center;
-}
-
-
-button img {
-    max-width: 185px;
-    margin-bottom: 10px;
-}
-
-button p {
-    margin: 5px 0 0 0;
+    background-color: #202632;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 769px;
+    height: 410px;
+    border-radius: 60px;
+    padding: 30px;
+    position: relative;
 }
 
 button:active {
-    transform: scale(0.95); /* 버튼을 클릭할 때 크기 감소 */
+    transform: scale(0.98); /* 살짝 작아지게 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 그림자를 축소 */
+}
+
+.standard-img {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    height: 250px;
+    max-height: 250px;
+}
+
+.large-text-img {
+    position: absolute;
+    top: 0px;
+    right: 30px;
+    width: 299px;
+    max-height: 250px;
+}
+
+.under-text-img {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    width: 287px;
+    max-height: 250px;
 }
 
 .large-text {
-    background-color: #0064FF;
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.large-text:hover {
-    background-color: #0056b3;
+    background-color: #EA4335;
 }
 
 .standard {
     background-color: #202632;
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.standard:hover {
-    background-color: #101522;
+.under-text {
+    background-color: #FBBC05;
+}
+
+.standard:hover, .standard:active {
+    background-color: #333D4F; /* 약간 어두운 톤으로 변경 */
+}
+
+.large-text:hover, .large-text:active {
+    background-color: #C74433; /* 약간 어두운 톤으로 변경 */
+}
+
+.under-text:hover, .under-text:active {
+    background-color: #D9A700; /* 약간 어두운 톤으로 변경 */
+}
+
+.header {
+    width: 910px;
+    height: 117px;
+    background-color: white;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 74px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
 }
