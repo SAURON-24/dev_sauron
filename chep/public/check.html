@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올려주세요</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom, #E8F2FF, #FFFFFF);
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 30px;
+            color: #202632;
+        }
+
+        .img_wrapper {
+            position: absolute;
+            top: 10%;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .logo {
+            width: 200px;
+        }
+
+        .circle {
+            height:512px;
+            margin-bottom: 100px;
+        }
+    
+    .circleBox {
+    display: flex;
+    flex-direction: column; /* 세로 정렬을 위해 추가 */
+    justify-content: center;
+    align-items: center;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="img_wrapper">
+        <img src="img/seesaw_logo2.png" alt="Logo" class="logo" onclick="location.href='index.html'">
+    </div>
+
+    <div class="circleBox">
+    <img src="img/circle.gif" alt="circle"class="circle" >
+    <h1 style="font-size: 60px; font-weight: bold;">분석 중...</h1>
+    </div>
+
+    <script>
+        let clickCount = 0;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const mode = localStorage.getItem('mode');
+                if (mode === 'senior') {
+                    window.location.href = 'old.html';
+                } else {
+                    window.location.href = 'new.html';
+                }
+            }, 5000); // 5초 후에 모드에 따라 페이지 이동
+        });
+
+        document.addEventListener('click', function() {
+            clickCount++;
+            localStorage.setItem('clickCount', clickCount); // 클릭 횟수를 저장
+        });
+    </script>
+</body>
+</html>
