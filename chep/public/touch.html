@@ -29,6 +29,7 @@
         
         .logo {
             width: 200px;
+            cursor: pointer;
         }
 
         .container {
@@ -96,14 +97,15 @@
         }
 
         button:active {
-            transform: scale(0.95);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transform: scale(0.93); /* 버튼을 클릭할 때 살짝 더 눌린 것처럼 크기 감소 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 그림자를 더 줄여서 눌린 효과 강화 */
+            background-color: #004bb5; /* 클릭 시 약간 더 어두운 색으로 변경 */
         }
     </style>
 </head>
 <body>
     <div class="img_wrapper">
-        <img src="img/seesaw_logo2.png" alt="Logo" class="logo">
+        <img src="img/seesaw_logo2.png" alt="Logo" class="logo" onclick="location.href='index.html'">
     </div>
     <div class="container">
         <header class="header">
