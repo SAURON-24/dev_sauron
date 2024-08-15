@@ -66,7 +66,6 @@
                     </div>
                     <span class="price">2000원</span>
                 </div>
-
             </div>
         </section>
         
@@ -86,12 +85,39 @@
         </div>
     </div>
 
+    <!-- 결제 시작 팝업 -->
     <div id="payment-popup" class="popup">
         <div class="popup-content">
             <div class="popup-title" id="popup-title">신용카드를 리더기에 대주세요.</div>
-            <img src="../public/img/tagging.gif" alt="Credit Card" class="popup-image" id="popup-image">
-            <button class="popup-cancel" onclick="closePopup()">취소</button>
-            <button class="popup-next" onclick="simulateTagging()">다음</button>
+            <div class="imgBox">
+                <img src="img/touching.gif" alt="Credit Card" class="popup-image card-image" id="popup-image">
+                <button class="popup-cancel" onclick="closePopup()">취소</button>
+                <button class="popup-next" onclick="simulateTagging()">다음</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 다음 단계 진행 중 팝업 -->
+    <div id="next-popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-title" id="next-popup-title">결제 진행 중...</div>
+            <div class="imgBox">
+                <img src="img/dot.gif" alt="Processing" class="popup-image processing-image">
+                <button class="popup-cancel" onclick="closePopup()">취소</button>
+                <button class="popup-next" onclick="simulateConfirmation()">다음</button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 결제 완료 팝업 -->
+    <div id="confirmation-popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-title" id="confirmation-popup-title">결제가 완료되었습니다.<br>감사합니다.</div>
+            <div class="imgBox">
+                <img src="img/check.gif" alt="Confirmation" class="popup-image confirmation-image">
+                <button class="popup-cancel" onclick="closePopup()">확인</button>
+            </div>
         </div>
     </div>
 
@@ -125,40 +151,33 @@
         }
 
         function startPayment() {
-            displayPopup();
+            displayPopup('payment-popup');
         }
 
-        function displayPopup() {
-            const popup = document.getElementById('payment-popup');
+        function displayPopup(popupId) {
+            const popup = document.getElementById(popupId);
             const overlay = document.getElementById('overlay');
             popup.style.display = 'block';
             overlay.style.display = 'block';
         }
 
         function closePopup() {
-            const popup = document.getElementById('payment-popup');
+            const popups = document.querySelectorAll('.popup');
             const overlay = document.getElementById('overlay');
-            popup.style.display = 'none';
+            popups.forEach(popup => {
+                popup.style.display = 'none';
+            });
             overlay.style.display = 'none';
         }
 
         function simulateTagging() {
-            const popupTitle = document.getElementById('popup-title');
-            popupTitle.innerHTML = "결제 진행 중...";
-            popupTitle.classList.remove('completed');
-            popupTitle.classList.add('processing');
-            document.getElementById('popup-image').src = "../public/img/dot.gif"; // 변경된 이미지
-            document.querySelector('.popup-next').onclick = simulateConfirmation;
-            document.querySelector('.popup-cancel').classList.remove('completed'); // 취소 버튼 위치 초기화
+            closePopup();
+            displayPopup('next-popup');
         }
 
         function simulateConfirmation() {
-            const popupTitle = document.getElementById('popup-title');
-            popupTitle.innerHTML = "결제가 완료되었습니다.<br>감사합니다.";
-            popupTitle.classList.remove('processing');
-            popupTitle.classList.add('completed');
-            document.getElementById('popup-image').src = "../public/img/check.gif"; // 변경된 이미지
-            document.querySelector('.popup-cancel').classList.add('completed'); // 취소 버튼 위치 조정
+            closePopup();
+            displayPopup('confirmation-popup');
         }
 
         // 초기 총합 계산

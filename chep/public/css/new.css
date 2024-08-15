@@ -16,7 +16,6 @@ html, body {
     height: 1920px;
     margin: 0 auto;
     padding: 50px;
-    border-radius: 35px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
@@ -102,7 +101,7 @@ html, body {
 .detected-tag span {
     flex: 1;
     text-align: center;
-    padding:20px 0;
+    padding: 20px 0;
 }
 
 .quantity-control {
@@ -143,7 +142,7 @@ html, body {
     align-items: center;
     padding: 25px;
     background-color: #fff;
-    border-radius:35px;
+    border-radius: 35px;
     font-size: 50px;
     font-weight: alternate;
     margin: 50px 0;
@@ -154,7 +153,6 @@ html, body {
     display: flex;
     justify-content: space-between;
     gap: 30px; /* 버튼들 사이의 간격을 30px로 설정 */
-
 }
 
 .moneyBtn_cancel,
@@ -200,13 +198,71 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 20px;
+    padding: 30px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* 팝업의 그림자 효과를 진하게 조정 */
-    border-radius: 40px;
+    border-radius: 70px;
     text-align: center;
     z-index: 1000;
-    width: 300px;
+    width: 948px;
+    height: 1027px;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.popup-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 110px;
+}
+
+.popup-image {
+    margin-bottom: 20px;
+}
+
+/* 개별 팝업 이미지 크기 조절 */
+.card-image {
+    width: 768px;
+    height: auto; /* 신용카드 리더기 이미지에 적합 */
+}
+
+.processing-image {
+    height: 379px; /* 전체 높이에 맞추고 비율 유지 */
+    width: auto;
+}
+
+.confirmation-image {
+    width: auto;
+    height: 333px; /* 결제 완료 이미지에 적합 */
+}
+
+.imgBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* 세로 정렬을 위해 flex-direction을 column으로 설정 */
+}
+
+.popup-cancel {
+    padding: 20px;
+    font-size: 40px;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    background-color: #f44336;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+    width: 500px;
+    height: 120px;
+    text-align: center;
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* 버튼의 그림자를 더 진하게 조정 */
+}
+
+.popup-cancel:hover {
+    background-color: #d32f2f;
 }
 
 .popup-cancel:active {
@@ -224,23 +280,4 @@ html, body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
-}
-
-.popup-title {
-    font-size: 30px;
-}
-
-.popup-cancel {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #f44336;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-.popup-cancel:hover {
-    background-color: #d32f2f;
 }
