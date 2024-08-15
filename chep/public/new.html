@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/new.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>주문 내역 확인</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <a href="index.html">
+                <img src="./img/seesaw_logo2.png" alt="Logo" style="width: 300px;">
+            </a>
+        </div>
+
+        <header class="headerBox">
+            <p>주문 내역 확인</p>
+            <div class="header-icons">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-plus"></i>
+            </div>
+        </header>
+
+        <section class="container">
+            <div class="listInfo">
+                <h4>상품명</h4>
+                <h4>수량</h4>
+                <h4>금액</h4>
+            </div>
+            <div class="inBox" id="detected-tags">
+                <div class="detected-tag">
+                    <span>꼬깔콘</span>
+                    <div class="quantity-control">
+                        <button onclick="updateQuantity(this, -1)">-</button>
+                        <span>1</span>
+                        <button onclick="updateQuantity(this, 1)">+</button>
+                    </div>
+                    <span class="price">2000원</span>
+                </div>
+                <div class="detected-tag">
+                    <span>바나나킥</span>
+                    <div class="quantity-control">
+                        <button onclick="updateQuantity(this, -1)">-</button>
+                        <span>1</span>
+                        <button onclick="updateQuantity(this, 1)">+</button>
+                    </div>
+                    <span class="price">2000원</span>
+                </div>
+                <div class="detected-tag">
+                    <span>포카칩</span>
+                    <div class="quantity-control">
+                        <button onclick="updateQuantity(this, -1)">-</button>
+                        <span>1</span>
+                        <button onclick="updateQuantity(this, 1)">+</button>
+                    </div>
+                    <span class="price">2000원</span>
+                </div>
+                <div class="detected-tag selected">
+                    <span>빅파이</span>
+                    <div class="quantity-control">
+                        <button onclick="updateQuantity(this, -1)">-</button>
+                        <span>1</span>
+                        <button onclick="updateQuantity(this, 1)">+</button>
+                    </div>
+                    <span class="price">2000원</span>
+                </div>
+                <div class="detected-tag">
+                    <span>맛동산</span>
+                    <div class="quantity-control">
+                        <button onclick="updateQuantity(this, -1)">-</button>
+                        <span>1</span>
+                        <button onclick="updateQuantity(this, 1)">+</button>
+                    </div>
+                    <span class="price">2000원</span>
+                </div>
+            </div>
+        </section>
+        
+        <div class="totalBox">
+            <span>합계</span>
+            <span id="total-items">5개</span>
+            <span id="total-price">10,000원</span>
+        </div>
+        
+        <div class="moneyBtnBox">
+            <button class="moneyBtn_cancel" onclick="location.href='index.html'">
+                <i class="fas fa-arrow-left"></i> 결제 취소
+            </button>
+            <button class="moneyBtn_fix" onclick="startPayment()">
+                결제 진행 <i class="fas fa-check"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="payment-popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-title" id="popup-title">신용카드를 리더기에 대주세요.</div>
+            <img src="../public/img/tagging.gif" alt="Credit Card" class="popup-image" id="popup-image">
+            <button class="popup-cancel" onclick="closePopup()">취소</button>
+            <button class="popup-next" onclick="simulateTagging()">다음</button>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        const itemPrice = 2000;
+
+        function updateQuantity(button, change) {
+            const quantitySpan = button.parentElement.querySelector('span');
+            let quantity = parseInt(quantitySpan.textContent);
+            quantity = Math.max(1, quantity + change); // 최소 수량을 1로 제한
+            quantitySpan.textContent = quantity;
+
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const tags = document.querySelectorAll('.detected-tag');
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            tags.forEach(tag => {
+                const quantity = parseInt(tag.querySelector('.quantity-control span').textContent);
+                totalItems += quantity;
+                totalPrice += quantity * itemPrice;
+            });
+
+            document.getElementById('total-items').textContent = `${totalItems}개`;
+            document.getElementById('total-price').textContent = `${totalPrice.toLocaleString()}원`;
+        }
+
+        function startPayment() {
+            displayPopup();
+        }
+
+        function displayPopup() {
+            const popup = document.getElementById('payment-popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('payment-popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function simulateTagging() {
+            const popupTitle = document.getElementById('popup-title');
+            popupTitle.innerHTML = "결제 진행 중...";
+            popupTitle.classList.remove('completed');
+            popupTitle.classList.add('processing');
+            document.getElementById('popup-image').src = "../public/img/dot.gif"; // 변경된 이미지
+            document.querySelector('.popup-next').onclick = simulateConfirmation;
+            document.querySelector('.popup-cancel').classList.remove('completed'); // 취소 버튼 위치 초기화
+        }
+
+        function simulateConfirmation() {
+            const popupTitle = document.getElementById('popup-title');
+            popupTitle.innerHTML = "결제가 완료되었습니다.<br>감사합니다.";
+            popupTitle.classList.remove('processing');
+            popupTitle.classList.add('completed');
+            document.getElementById('popup-image').src = "../public/img/check.gif"; // 변경된 이미지
+            document.querySelector('.popup-cancel').classList.add('completed'); // 취소 버튼 위치 조정
+        }
+
+        // 초기 총합 계산
+        updateTotal();
+    </script>
+</body>
+</html>

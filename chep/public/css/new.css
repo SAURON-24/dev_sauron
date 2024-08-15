@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 1920px;
+    font-family: Arial, sans-serif;
+    background-color: #F6F8FA;
+}
+
+.wrapper {
+    width: 1080px;
+    height: 1920px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 35px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to bottom, #D3E6FF, #FFFFFF);
+}
+
+.headerBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    font-size: 50px;
+    font-weight: bold;
+    border-radius: 50px;
+    margin-bottom: 50px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.headerBox p {
+    margin: 0 auto; /* 중앙 정렬 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.header-icons i {
+    font-size: 40px;
+    cursor: pointer;
+    color: #202632;
+}
+
+.header-icons i:hover {
+    color: #007bff;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background-color: #FFF;
+    border-radius: 80px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* container의 그림자 효과를 조정 */
+}
+
+.listInfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 80px;
+    margin-bottom: 20px;
+    font-size: 46px;
+    font-weight: bold;
+}
+
+.inBox {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.detected-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    font-size: 36px;
+}
+
+.detected-tag.selected {
+    background-color: #FAE6E6;
+    border-radius: 50px;
+}
+
+.detected-tag span {
+    flex: 1;
+    text-align: center;
+    padding:20px 0;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-control button {
+    background-color: #FFF;
+    border: none;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 36px;
+
+}
+
+.quantity-control span {
+    margin: 0 10px;
+    font-size: 36px;
+}
+
+.logo {
+    padding-bottom: 40px;
+}
+
+.totalBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    background-color: #fff;
+    border-radius:35px;
+    font-size: 50px;
+    font-weight: alternate;
+    margin: 50px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.moneyBtnBox {
+    display: flex;
+    justify-content: space-between;
+}
+
+.moneyBtn_cancel,
+.moneyBtn_fix {
+    flex: 1;
+    padding: 50px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+    border-radius: 35px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* 버튼의 그림자 효과를 진하게 조정 */
+}
+
+.moneyBtn_cancel{
+    margin-right:30px;
+}
+
+.moneyBtn_cancel {
+    background-color: #333;
+}
+
+.moneyBtn_fix {
+    background-color: #007bff;
+}
+
+.moneyBtn_cancel:hover {
+    background-color: #555;
+}
+
+.moneyBtn_fix:hover {
+    background-color: #0056b3;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* 팝업의 그림자 효과를 진하게 조정 */
+    border-radius: 40px;
+    text-align: center;
+    z-index: 1000;
+    width: 300px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup-title {
+    font-size: 30px;
+}
+
+.popup-cancel {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup-cancel:hover {
+    background-color: #d32f2f;
+}
