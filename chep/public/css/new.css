@@ -96,6 +96,7 @@ html, body {
 .detected-tag.selected {
     background-color: #FAE6E6;
     border-radius: 50px;
+    border: 3px solid #FF4A4A; /* 빨간색 외곽선 추가 */
 }
 
 .detected-tag span {
@@ -118,7 +119,13 @@ html, body {
     height: 50px;
     cursor: pointer;
     font-size: 36px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
 
+.quantity-control button:active {
+    transform: scale(0.95); /* 버튼을 눌렀을 때 크기를 살짝 줄임 */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5); /* 그림자를 더 작게 만들어 눌린 효과를 강화 */
+    background-color: #e0e0e0; /* 눌렀을 때 배경색을 살짝 어둡게 변경 */
 }
 
 .quantity-control span {
@@ -146,6 +153,8 @@ html, body {
 .moneyBtnBox {
     display: flex;
     justify-content: space-between;
+    gap: 30px; /* 버튼들 사이의 간격을 30px로 설정 */
+
 }
 
 .moneyBtn_cancel,
@@ -159,10 +168,13 @@ html, body {
     cursor: pointer;
     border-radius: 35px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* 버튼의 그림자 효과를 진하게 조정 */
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.moneyBtn_cancel{
-    margin-right:30px;
+.moneyBtn_cancel:active,
+.moneyBtn_fix:active {
+    transform: scale(0.95); /* 버튼을 눌렀을 때 크기를 살짝 줄임 */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5); /* 그림자를 더 작게 만들어 눌린 효과를 강화 */
 }
 
 .moneyBtn_cancel {
@@ -194,6 +206,13 @@ html, body {
     text-align: center;
     z-index: 1000;
     width: 300px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.popup-cancel:active {
+    transform: scale(0.95); /* 버튼을 눌렀을 때 크기를 살짝 줄임 */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5); /* 그림자를 더 작게 만들어 눌린 효과를 강화 */
+    background-color: #d32f2f; /* 팝업 취소 버튼이 눌렸을 때 약간 더 어두운 색상으로 변경 */
 }
 
 .overlay {
@@ -219,6 +238,7 @@ html, body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .popup-cancel:hover {
