@@ -27,3 +27,33 @@
 <br>
 <br>
 
+## 📺 기능 및 화면
+### 키오스크 화면
+
+
+### -관리자페이지(pc버전)
+![실시간 매장](https://github.com/user-attachments/assets/1ac40d5d-a5b7-4790-917f-72d4f42a5b1b)
+![매장관리](https://github.com/user-attachments/assets/646dff63-7e5d-47b3-9c62-1092cf608f77)
+![보안현황](https://github.com/user-attachments/assets/da4e67aa-9789-4595-9111-5234b98d1396)
+![재고관리](https://github.com/user-attachments/assets/c24250ee-c598-4ce8-ac92-6fdb17faa4d8)
+<br>
+<br>
+
+### -관리자페이지(pc버전 - 로그인,회원가입화면 )
+###  ⬇️
+
+<img width="1111" alt="스크린샷 2024-09-13 오전 3 27 20" src="https://github.com/user-attachments/assets/22d31afa-ea72-4fb9-ac42-f908e5d9dbf2">
+
+<br>
+<br>
+
+###  ⬇️
+
+<img width="1110" alt="스크린샷 2024-09-13 오전 3 27 04" src="https://github.com/user-attachments/assets/98524e4a-c659-4bf8-a195-d4e17b541330">
+
+
+
+<br>
+<br>
+<br>
+
