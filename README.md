@@ -7,19 +7,19 @@
 <br>
 <br>
 
-# 🎬 추진배경 및 필요성
+## 🎬 추진배경 및 필요성
 ![3](https://github.com/user-attachments/assets/93f892a9-31db-4d62-8bdd-0b4133d8d085)
 <br>
 <br>
 <br>
 
-# 🎥 시연 영상
+## 🎥 시연 영상
 ![4](https://github.com/user-attachments/assets/2eef9b3c-0650-45ae-bb5d-8883854ec654)
 <br>
 <br>
 <br>
 
-# 🗺️ 전체 아키텍처
+## 🗺️ 전체 아키텍처
 ![5](https://github.com/user-attachments/assets/57223b08-484b-448d-8aae-aa3d1d8d0c9e)
 ![6](https://github.com/user-attachments/assets/fa26c83f-86a4-4958-a4b4-65d72c1f6def)
 
