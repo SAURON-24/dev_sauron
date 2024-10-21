@@ -15,7 +15,7 @@ def read_item(item_id: int, q: str = None):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 필요한 도메인만 추가하세요.
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
