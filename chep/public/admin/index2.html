@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAURON</title>
+    <link rel="stylesheet" href="styles2.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="img/seesaw_logo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul class="no_dot">
+                    <li class="dropdown">
+                        <div class="nav-line">
+                        <span class="nav-title" ><div class="myMarket-title"><i class="fas fa-store"></i> 나의 매장 <i class="fas fa-caret-down"></i></div>
+                        <div class="dropdown-content">
+                            <a href="#" class="active-store"><span>히어로 매장</span><i class="fas fa-ellipsis-h"></i></a>
+                            <a href="#"><span>피더문 무인카페</span></a>
+                            <a href="#"><span>사기문 아이스크림매점</span></a>
+                        </div>
+                    </div>
+                    </span>
+                    </li>
+                    <div class="li-line">
+                    <li class="dropdown">
+                        <span class="nav-item"><i class="fa-regular fa-star"></i> 매장관리 <i class="fas fa-caret-down"></i></span>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showContent('environment-control')">환경제어</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <span class="nav-item"><i class="fa-regular fa-star"></i> 매출관리 <i class="fas fa-caret-down"></i></span>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showContent('sales-record-management')">매출 기록 관리</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <span class="nav-item"><i class="fa-regular fa-star"></i> 보안현황 <i class="fas fa-caret-down"></i></span>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showContent('abnormal-behavior-notification')">이상행동 알림</a>
+                            <a href="#" onclick="showContent('cctv')">실시간 매장 CCTV</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <span class="nav-item"><i class="fa-regular fa-star"></i> 재고관리 <i class="fas fa-caret-down"></i></span>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showContent('inventory-management')">재고관리</a>
+                        </div>
+                    </li>
+                </div>
+                </ul>
+            </nav>
+        </aside>
+        <!-- 메인 콘텐츠 -->
+        <main class="dashboard-main">
+            <!-- 헤더 -->
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <div class="header-title">실시간 매장 CCTV</div>
+                </div>
+                <div class="user-info">
+                    <div class="happy-msg">대박나세요~ ‘아바문 편의점’의 ‘홍길동’ 점주님!
+                    <a href="#" class="mypage">마이페이지</a>
+                    <button class="notification-btn"><i class="fas fa-bell"></i></button>
+                </div>
+                </div>
+            </header>
+            <div class="content">
+                <!-- 고객 출입 이력 섹션 -->
+                <div class="commingListBox">
+                    <section id="my-store" class="store-info">
+                        <div class="store-title">고객 출입이력</div>
+                        <div class="store-selection">
+                            <!-- <div class="store-nameBox">
+                                <div class="store-name">히어로 마트</div>
+                                <div class="store-branch">나의 매장</div>
+                            </div>
+                            <select name="branch" id="branch">
+                                <option value="seoul">야바문 편의점 (서울)</option>
+                            </select>
+                        </div>
+                        <div class="filters">
+                            <button class="filter-btn">24시간</button>
+                            <button class="filter-btn">일주일</button>
+                            <button class="filter-btn">입력필</button>
+                            <input type="date" class="date-picker">
+                        </div>
+                        <div class="customer-log">
+                            <ul>
+                                <li><img src="user-icon.png" alt="User"> user7 2024.05.28 22:50:56</li>
+                                <li><img src="user-icon.png" alt="User"> user6 2024.05.28 22:50:56</li>
+                                <li><img src="user-icon.png" alt="User"> user5 2024.05.28 22:50:56</li>
+                                <li><img src="user-icon.png" alt="User"> user4 2024.05.28 22:50:56</li>
+                                <li><img src="user-icon.png" alt="User"> user3 2024.05.28 22:50:56</li>
+                                <li><img src="user-icon.png" alt="User"> user2 2024.05.28 22:50:56</li>
+                                <li><img src="user-icon.png" alt="User"> user1 2024.05.28 22:50:56</li>
+                            </ul>
+                        </div> -->
+                    </section>
+                </div>
+                <div class="liveBox">
+                    <div class="topBox">
+                        <div class="liveCctv">
+                            <div class="liveTitle">실시간 매장</div>
+                            <!-- <div class="cctv"></div> -->
+                        </div>
+                        <div class="storeStatusBox">
+                            <div id="content" class="marketStoreStatus"></div>
+                            <div class="marketStatus"></div>
+                        </div>
+                    </div>
+                    <div class="bunchBtnBox">
+                        <div class="bunchBtn"></div>
+                    </div>        
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        function showContent(contentId) {
+            var contentMap = {
+                'environment-control': '환경제어',
+                'sales-record-management': '매출기록관리',
+                'abnormal-behavior-notification': '이상행동알림',
+                'cctv': '실시간 매장 CCTV',
+                'inventory-management': '재고관리'
+            };
+            document.querySelector('.header-title').textContent = contentMap[contentId];
+            document.getElementById('content').textContent = contentMap[contentId];
+        }
+    </script>
+</body>
+</html>

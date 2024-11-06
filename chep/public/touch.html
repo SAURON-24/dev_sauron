@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/touch.css"> <!-- CSS 경로 확인 -->
+    <title>올려주세요</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom, #D3E6FF, #FFFFFF);
+            flex-direction: column;
+            position: relative;
+        }
+
+        .img_wrapper {
+            position: absolute;
+            top: 10%;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .logo {
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px;
+            width: 70%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .header {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 10px 0;
+            font-size: 40px;
+            font-weight: 700;
+            color: #202632;
+        }
+
+        .header h1 span {
+            color: #0064FF;
+            font-weight: 900;
+        }
+
+        .camera-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .camera-section img {
+            width: 749px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 40px;
+            cursor: pointer;
+            border: none;
+            border-radius: 30px;
+            background-color: #0064FF;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+            width: 70%;
+            height: 100px;
+            text-align: center;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: scale(0.93); /* 버튼을 클릭할 때 살짝 더 눌린 것처럼 크기 감소 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 그림자를 더 줄여서 눌린 효과 강화 */
+            background-color: #004bb5; /* 클릭 시 약간 더 어두운 색으로 변경 */
+        }
+    </style>
+</head>
+<body>
+    <div class="img_wrapper">
+        <img src="img/seesaw_logo2.png" alt="Logo" class="logo" onclick="location.href='index.html'">
+    </div>
+    <div class="container">
+        <header class="header">
+            <h1>정확한 인식을 위해</h1>
+            <h1><span>카메라</span> 앞에 물건을 올려주세요</h1>
+        </header>
+        <div class="camera-section">
+            <img src="img/line_check.png" alt="Camera">
+        </div>
+        <button id="start-analysis">분석 시작</button>
+    </div>
+
+    <script>
+        document.getElementById('start-analysis').addEventListener('click', function() {
+            window.location.href = 'check.html';
+        });
+    </script>
+</body>
+</html>
